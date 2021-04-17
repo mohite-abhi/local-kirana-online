@@ -261,25 +261,6 @@ const createStore=async()=>{
     {
         console.log(err);
     }
-
-
-
-//  Item
-// .findOne({itemName:"Amul milk"})
-// .populate('itemID')
-// .exec(function (err, user) {
-// if (err) return handleError(err);
-// console.log(user.itemID);
-// });
-
-// Item
-// .findOne({itemName:"Amul lassi"})
-// .populate('itemID')
-// .exec(function (err, user) {
-// if (err) return handleError(err);
-// console.log(user.itemID);
-// });
-
     
 }
 
