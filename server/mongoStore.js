@@ -261,17 +261,60 @@ const createStore=async()=>{
     {
         console.log(err);
     }
-
     
 }
 
-createDocument();
-createItem();
-createStore();
+const locationSchema= new Schema({
+    pin :{
+        type: Number,
+        required: true
+    },
+    storeID: [{ 
+        type: Schema.Types.ObjectId,
+        ref: 'Store' 
+    }]
+})
+
+const Location = new mongoose.model("Location",locationSchema);
+
+const createLocation=async()=>{
+    try{
+       
+        const location_detail= new Location(
+            {
+                pin :752030,
+                storeID:["607ac8708a958823fcab145e","607ac8495be39e3164c4af4e", "607ac8391135de1ce86f4232"]
+            }
+        )
+
+        result = await location_detail.save(); // for inserting multiple documents at a time
+        //  const result = await customer_detail.save(); for inserting one document at a time
+        console.log(result);
+        Location
+        .findOne({pin:752030})
+        .populate('storeID')
+        .exec(function (err,item) {
+        if (err) return handleError(err);
+        console.log(item.storeID);
+        });
+      
+    }
+
+    catch(err)
+    {
+        console.log(err);
+    }
+    
+}
 
 
+// createDocument();
+// createItem();
+// createStore();
+// createLocation();
 
 
+module.exports = {Store:Store, Location:Location};
 
 
 
