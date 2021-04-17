@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "bootstrap": "^4.6.0",
+    "express": "^4.17.1",
     "mongoose": "^5.12.3",
     "mongoose-type-url": "^2.1.0",
     "@testing-library/jest-dom": "^5.11.10",
