@@ -3,14 +3,16 @@ require("./dbs/conn");
 const Customer = require("./models/customers");
 const Item = require("./models/items");
 const Store = require("./models/shops");
-const Location=require("./models/location")
+const Location=require("./models/location");
+const userRoutes =require('./routes/user');
+const env = require('dotenv');
 
-
+env.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-
 app.use(express.json());
+app.use('',userRoutes);
 
 
 app.post("/customer", async(req,res) => {
