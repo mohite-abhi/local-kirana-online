@@ -1,6 +1,8 @@
 const mongoStore = require("./mongoStore.js")
 const express = require('express');
 
+const bodyParser = require('body-parser');
+require(".db/conn");
 
 
 const app = express();
@@ -25,7 +27,6 @@ app.get('/api/itemsFromStore', (req, res) => {
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
-
 
 //ex run on browser: http://localhost:5000/api/storesFromLocation?pin=752030
 app.get('/api/storesFromLocation', (req, res) => {
