@@ -4,7 +4,8 @@ const Customer = require("./models/customers");
 const Item = require("./models/items");
 const Store = require("./models/shops");
 const Location=require("./models/location");
-const userRoutes =require('./routes/user');
+const userRoutes =require('./routes/auth');
+const adminRoutes = require('./routes/admin/auth');
 const env = require('dotenv');
 
 env.config();
@@ -13,6 +14,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use('',userRoutes);
+app.use('',adminRoutes);
 
 
 app.post("/customer", async(req,res) => {

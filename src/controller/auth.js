@@ -1,27 +1,25 @@
-const express = require("express");
-const router = express.Router();
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 
-router.post('/signup',async(req,res) =>{
+exports.signup = async(req,res)=>{
     try{
-        const user = await User.findOne({email : req.body.email});
-        console.log(user);
-        if(user)
-        {
-            return res.status(400).send("email already exists");
-        }
-  const userData = new User(req.body);
-  const createUser = await userData.save();
-  res.status(201).send(createUser);
- 
-     }
-     catch(err){
-         res.status(400).send(err);
-     }
-})
+    const user = await User.findOne({email : req.body.email});
+    console.log(user);
+    if(user)
+    {
+        return res.status(400).send("email already exists");
+    }
+const userData = new User(req.body);
+const createUser = await userData.save();
+res.status(201).send(createUser);
 
-router.post('/signin',async(req,res) =>{
+ }
+ catch(err){
+     res.status(400).send(err);
+ }
+}
+
+exports.signin = async(req,res) =>{
     try{
         const user = await User.findOne({email : req.body.email});
         if(user)
@@ -44,7 +42,14 @@ router.post('/signin',async(req,res) =>{
      catch(err){
          res.status(400).send(err);
      }
+}
 
-})
 
-module.exports = router ;
+exports.requireSignin = (req,res,next) =>{
+    const token = req.headers.authorization.split(" ")[1];
+    const user = jwt.verify(token,process.env.JWT_SECRET);
+    console.log(user);
+    req.user = user;
+    next();
+    //jwt.decode()
+}
