@@ -71,40 +71,39 @@ app.get("/storesFromLocation", (req, res) => {
 
 })
 
+app.get("/shopitem/:id",async(req,res)=>{
+  try{
+      const _id = req.params.id;
+      console.log(_id);
+      Store
+      .findOne({_id})
+      .populate('itemID')
+      .exec(function (err,item) {
+      if (err) return handleError(err);
+      res.send(item.itemID)
+      });
+  }
+  catch(err)
+  {
+    res.status(400).send(err);
+  }
+  })
 
-  app.get("/shopitem/:id",async(req,res)=>{
+  app.get("/searchitem",async(req,res)=>{
     try{
-        const _id = req.params.id;
-        console.log(_id);
-        Store
-        .findOne({_id})
-        .populate('itemID')
-        .exec(function (err,item) {
-        if (err) return handleError(err);
-        res.send(item.itemID)
-        });
+        const itemName= req.body.itemName;
+        console.log(itemName);
+        const name = await Item.find({itemName:itemName});
+        console.log(name[0]._id);
+        const result = await Store.find({itemID :{$in :[name[0]._id]}});
+        res.status(201).send(result);
+
     }
     catch(err)
     {
       res.status(400).send(err);
     }
     })
-
-    app.get("/searchitem",async(req,res)=>{
-      try{
-          const itemName= req.body.itemName;
-          console.log(itemName);
-          const name = await Item.find({itemName:itemName});
-          console.log(name[0]._id);
-          const result = await Store.find({itemID :{$in :[name[0]._id]}});
-          res.status(201).send(result);
-
-      }
-      catch(err)
-      {
-        res.status(400).send(err);
-      }
-      })
 
    
         
