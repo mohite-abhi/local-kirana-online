@@ -48,28 +48,28 @@ app.post("/shop",async(req,res) => {
 })
 
 
-// app.get("/shop",async(req,res)=>{
-// try{
-//   console.log(req.body.pin);
-//   const storeData=await Store.find({pin:req.body.pin});
-//   res.status(201).send(storeData);
-// }
-// catch(err)
-// {
-//   res.status(400).send(err);
-// }
-// })
-
-app.get("/storesFromLocation", (req, res) => {
-        Location
-        .findOne({pin:req.body.pin})
-        .populate('storeID')
-        .exec(function (err,store) {
-        if (err) return handleError(err);
-        res.send(store.storeID);
-        });
-
+app.get("/storesFromLocation",async(req,res)=>{
+try{
+  console.log(req.body.pin);
+  const storeData=await Store.find({pin:req.body.pin});
+  res.status(201).send(storeData);
+}
+catch(err)
+{
+  res.status(400).send(err);
+}
 })
+
+// app.get("/storesFromLocation", (req, res) => {
+//         Location
+//         .find({pin:req.body.pin})
+//         .populate('storeID')
+//         .exec(function (err,store) {
+//         if (err) return handleError(err);
+//         res.send(store.storeID);
+//         });
+
+// })
 
 app.get("/shopitem/:id",async(req,res)=>{
   try{
@@ -89,14 +89,19 @@ app.get("/shopitem/:id",async(req,res)=>{
   }
   })
 
-  app.get("/searchitem",async(req,res)=>{
+  app.get("/searchitem/:id",async(req,res)=>{
     try{
+        const _id = req.params.id;
         const itemName= req.body.itemName;
         console.log(itemName);
         const name = await Item.find({itemName:itemName});
         console.log(name[0]._id);
-        const result = await Store.find({itemID :{$in :[name[0]._id]}});
-        res.status(201).send(result);
+        const result = await Store.find({$and : [{itemID :{$in :[name[0]._id]}},{_id}] });
+        // const search1 = await Store.find({_id});
+        // console.log(search1);
+        // const search2 = await search1.find({itemID :{$in :[name[0]._id]} }); 
+        // console.log(search2);
+         res.status(201).send(result);
 
     }
     catch(err)
