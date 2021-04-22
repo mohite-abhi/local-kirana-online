@@ -4,21 +4,38 @@ const Customer = require("./models/customers");
 const Item = require("./models/items");
 const Store = require("./models/shops");
 const Location=require("./models/location");
+var cors = require("cors");
 const userRoutes =require('./routes/auth');
 const adminRoutes = require('./routes/admin/auth');
 const env = require('dotenv');
-const path = require('path')
+const path = require('path');
+testApi = require("./routes/testapi");
 env.config();
 const app = express();
-const port = process.env.PORT || 3000;
-/*
+const port = process.env.PORT || 9000;
+
+app.use('/testAPI',testApi);
 app.use(express.json());
-app.use(express.static('index.js'));
+app.use(cors());
+//app.use(express.static('index.js'));
 app.use('',userRoutes);
 app.use('',adminRoutes);
-*/
+
 //app.listen(port, () => console.log(`Listening on port ${port}`));
-app.use(express.static(path.join(__dirname, 'build')))
+//app.use(express.static(path.join(__dirname, 'src')));
+//app.get('/', (req, res) => {
+  //res.sendFile(path.join(__dirname, 'src', 'index.js'))
+//})
+
+/*
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'public')));
+    
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+*/
 
 app.post("/customer", async(req,res) => {
   try{

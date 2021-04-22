@@ -1,6 +1,9 @@
 import React from "react";
 import './App.css';
-import Header from "./components/header"
+import Slider from "./components/slider";
+
+import Header from "./components/header";
+import Pin from "./components/pincodeform";
 import {Link } from "react-router-dom";
 
     function Page1() {
@@ -8,6 +11,8 @@ import {Link } from "react-router-dom";
         return (
           <>
           <Header/>
+          <Slider />
+          <Pin/>
           </>
           /*<div>
            
@@ -19,5 +24,6 @@ import {Link } from "react-router-dom";
         );
 
     }
+    
 
     export default Page1;
