@@ -5,20 +5,21 @@ const Item = require("./models/items");
 const Store = require("./models/shops");
 const Location=require("./models/location");
 const userRoutes =require('./routes/auth');
+const testApi = require('./routes/testapi')
 const adminRoutes = require('./routes/admin/auth');
 const env = require('dotenv');
 const path = require('path')
 env.config();
 const app = express();
-const port = process.env.PORT || 3000;
-/*
+const port = process.env.PORT || 9000;
+
 app.use(express.json());
-app.use(express.static('index.js'));
+//app.use(express.static('index.js'));
 app.use('',userRoutes);
 app.use('',adminRoutes);
-*/
+app.use('/testApi',testApi);
 //app.listen(port, () => console.log(`Listening on port ${port}`));
-app.use(express.static(path.join(__dirname, 'build')))
+//app.use(express.static(path.join(__dirname, 'build')))
 
 app.post("/customer", async(req,res) => {
   try{
@@ -52,8 +53,14 @@ app.post("/shop",async(req,res) => {
   }
 })
 console.log("hello");
-app.post("/shop",(request,response) => {
-console.log(request);
+app.post("/shopi",(request,response) => {
+  response.setHeader('Access-Control-Allow-Origin', '*');
+response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+response.setHeader('Access-Control-Allow-Credentials', true);
+next();
+console.log(request.body);
+response.send("manish chutiya");
 
 });
 

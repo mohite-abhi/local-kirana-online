@@ -5,13 +5,17 @@ import fetch from 'isomorphic-fetch';
 
 class App extends React.PureComponent {
     
-  
+  constructor(props){
+      super(props);
     
+    this.state = {
+    apiResponse : ""
+    }
+    ;}
     state = {
         value: ""
 
-    };
-
+    }
     onChange = (value) => {
         this.setState({ value });
     };
@@ -31,11 +35,11 @@ class App extends React.PureComponent {
           return value;
         };
       };*/
-    submit = (value) => {
-     //   this.callAPI();
-         
+    //submit=()=>  {
+      // this.callAPI();
+    //}    
          //console.log(value);
-        fetch('https://localhost:9000/testApi', {
+        /*fetch('https://localhost:9000/testApi', {
                 method: 'GET',
                 mode: 'CORS',
                 //body: JSON.stringify(val),
@@ -44,13 +48,22 @@ class App extends React.PureComponent {
                 }
             }).then(res => res.text())
             .then(res => this.setState({apiResponse: res}));
-            };
-   /* callAPI(){
-        fetch("http://localhost:9000/testAPI")
+            };*/
+   callAPI(value){
+       console.log(value);
+        fetch("http://localhost:9000/shopi",{
+            method: 'POST',
+           // mode: 'CORS',
+            body: JSON.stringify({value:value}),
+            headers: {
+            'Content-Type': 'application/json'
+        }
+    })
         .then(res => res.text())
-        .then(res => this.setState({apiResponse: res}));
+        .then(res => this.setState({apiResponse: res}))
+        ;
 
-    }*/
+    }
   //  componentWillMount(){
     //    this.callAPI();
 
@@ -82,7 +95,7 @@ class App extends React.PureComponent {
                 <div>
                 <button onClick={this.onClear}>Clear</button>
                         
-                <button onClick={this.submit()}> Submit</button>
+                <button onClick={()=>this.callAPI(value)}> Submit</button>
                 <p>{this.state.apiResponse}</p> 
                    </div>  
                 
