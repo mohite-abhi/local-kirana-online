@@ -24,7 +24,7 @@ export default function ControlledCarousel() {
             display= "block"
             max-width =  "100%"
             height= "400"
-            paddingTop = "56.25%"
+            paddingtop = "56.25%"
           />
           <Carousel.Caption>
             <h3>First slide label</h3>
@@ -38,7 +38,7 @@ export default function ControlledCarousel() {
             alt="Second slide"
             max-width =  "100%"
             height= "400"
-            paddingTop = "56.25%"
+            paddingtop = "56.25%"
           />
   
           <Carousel.Caption>
@@ -53,7 +53,7 @@ export default function ControlledCarousel() {
             alt="Third slide"
             max-width =  "100%"
             height= "400"
-            paddingTop = "56.25%"
+            paddingtop = "56.25%"
           />
   
           <Carousel.Caption>

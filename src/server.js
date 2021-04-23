@@ -6,6 +6,9 @@ const Store = require("./models/shops");
 const Location=require("./models/location");
 const userRoutes =require('./routes/auth');
 const testApi = require('./routes/testapi')
+const cors = require('cors');
+const objpn = null;
+//const sendpin = require('./routes/sendp');
 const adminRoutes = require('./routes/admin/auth');
 const env = require('dotenv');
 const path = require('path')
@@ -13,13 +16,24 @@ env.config();
 const app = express();
 const port = process.env.PORT || 9000;
 
+
 app.use(express.json());
+app.use(cors());
 //app.use(express.static('index.js'));
 app.use('',userRoutes);
 app.use('',adminRoutes);
+//app.use('/s',sendpin);
 app.use('/testApi',testApi);
 //app.listen(port, () => console.log(`Listening on port ${port}`));
 //app.use(express.static(path.join(__dirname, 'build')))
+
+
+app.post("/shop", function(req, res){
+  console.log(req.body)
+res.send("manish chutiya");
+
+});
+
 
 app.post("/customer", async(req,res) => {
   try{
@@ -53,17 +67,24 @@ app.post("/shop",async(req,res) => {
   }
 })
 console.log("hello");
-app.post("/shopi",(request,response) => {
-  response.setHeader('Access-Control-Allow-Origin', '*');
-response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-response.setHeader('Access-Control-Allow-Credentials', true);
-next();
-console.log(request.body);
-response.send("manish chutiya");
+app.post("/s", function(req, res){
+  console.log(req.body)
+  //objpin  = JSON.parse(req.body);
+res.send("api is working awesomely");
 
 });
-
+app.get("/storesFromLocation",async(req,res)=>{
+try{
+  console.log(req.body.pin);
+  const storeData = await Store.find({pin:obj.value});
+  console.log(storeData);
+  res.status(201).send(storeData);
+}
+catch(err)
+{
+  res.status(400).send(err);
+}
+})
  //app.get("/shop",async(req,res)=>{
 // try{
  //   var 
@@ -76,7 +97,7 @@ response.send("manish chutiya");
 //   res.status(400).send(err);
 // }
 // })
-
+/*
 app.get("/storesFromLocation", (req, res) => {
         Location
         .findOne({pin:req.body.pin})
@@ -87,7 +108,7 @@ app.get("/storesFromLocation", (req, res) => {
         });
 
 })
-
+*/
 
   app.get("/shopitem/:id",async(req,res)=>{
     try{

@@ -51,7 +51,7 @@ class App extends React.PureComponent {
             };*/
    callAPI(value){
        console.log(value);
-        fetch("http://localhost:9000/shopi",{
+        fetch("http://localhost:9000/s",{
             method: 'POST',
            // mode: 'CORS',
             body: JSON.stringify({value:value}),
