@@ -2,7 +2,7 @@ const mongoStore = require("./mongoStore.js")
 const express = require('express');
 
 const bodyParser = require('body-parser');
-require(".db/conn");
+// require(".mongoStore/conn");
 
 
 const app = express();
@@ -10,6 +10,26 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+app.post('/api/ingredientsFromDishName', (req, res) => {
+  var result = []
+  const dishName = req.body.dishName
+  var requertUrl = "https://api.edamam.com/search?q="+dishName+"&app_id=2934760b&app_key=1ebf165ca5f330d5c70bcd44f83aa8ec"
+  axios.get(requertUrl)
+    .then(response => {
+        apiResponse = response.data["hits"][0]["recipe"]["ingredientLines"].join(" ").replace(/([.*+?^=!:${}()|\[\]\/\\\-])/g," ").split(" ")
+        apiResponse.forEach(element => {
+          if (isNaN(element) == true) result.push(element);
+        });
+        console.log(result);
+        res.send(result);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+   
+
+});
 
 
 //ex run on browser: http://localhost:5000/api/itemsFromStore?storeName=Dingdong Groceries
