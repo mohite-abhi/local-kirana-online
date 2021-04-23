@@ -44,12 +44,3 @@ exports.signin = async(req,res) =>{
      }
 }
 
-
-exports.requireSignin = (req,res,next) =>{
-    const token = req.headers.authorization.split(" ")[1];
-    const user = jwt.verify(token,process.env.JWT_SECRET);
-    console.log(user);
-    req.user = user;
-    next();
-    //jwt.decode()
-}

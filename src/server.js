@@ -7,6 +7,7 @@ const Location=require("./models/location");
 const userRoutes =require('./routes/auth');
 const adminRoutes = require('./routes/admin/auth');
 const env = require('dotenv');
+const categoryRoutes=require('./routes/category')
 
 env.config();
 const app = express();
@@ -15,6 +16,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use('',userRoutes);
 app.use('',adminRoutes);
+app.use('',categoryRoutes);
 
 
 app.post("/customer", async(req,res) => {
@@ -52,7 +54,7 @@ app.get("/storesFromLocation",async(req,res)=>{
 try{
   console.log(req.body.pin);
   const storeData=await Store.find({pin:req.body.pin});
-  res.status(201).send(storeData);
+  res.status(201).json({storeData});
 }
 catch(err)
 {
@@ -62,7 +64,7 @@ catch(err)
 
 // app.get("/storesFromLocation", (req, res) => {
 //         Location
-//         .find({pin:req.body.pin})
+//         .findOne({pin:req.body.pin})
 //         .populate('storeID')
 //         .exec(function (err,store) {
 //         if (err) return handleError(err);
