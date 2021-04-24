@@ -5,6 +5,10 @@ const Item = require("./models/items");
 const Store = require("./models/shops");
 const Location=require("./models/location");
 const userRoutes =require('./routes/auth');
+const testApi = require('./routes/testapi')
+const cors = require('cors');
+const objpn = null;
+//const sendpin = require('./routes/sendp');
 const adminRoutes = require('./routes/admin/auth');
 const env = require('dotenv');
 const categoryRoutes=require('./routes/category')
@@ -12,9 +16,12 @@ const axios = require('axios')
 
 env.config();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 9000;
+
 
 app.use(express.json());
+app.use(cors());
+//app.use(express.static('index.js'));
 app.use('',userRoutes);
 app.use('',adminRoutes);
 app.use('',categoryRoutes);
@@ -36,6 +43,8 @@ app.post("/customer", async(req,res) => {
 
 app.post("/shop",async(req,res) => {
   try{
+    // var pin = req.body.value;
+    //console.log("pin = "+pin);
     console.log(req.body.shop);
     console.log("hello");
     console.log(req.body.item);

@@ -11,11 +11,10 @@ import page2 from "./App3";
 ReactDOM.render(
   <BrowserRouter>
   <switch>
-  <React.StrictMode>
+  
     <Route exact path="/" component={page0}/>
     <Route path="/shop" component = {App} />
     <Route path="/item" component = {page2} />
-  </React.StrictMode>
   </switch>
   </BrowserRouter>,
   document.getElementById('root')
