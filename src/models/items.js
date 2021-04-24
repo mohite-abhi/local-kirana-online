@@ -26,18 +26,19 @@ const itemSchema= new Schema({
         trim:true
     },
     itemCategory :{
-        type:String,
-        required:true
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Category'
     },
     itemPicture:{
         img:{type:String}
-    }
-    // reviews: [
-    //     {
-    //         userId:mongoose.Schema.ObjectId, ref:'User',
-    //         review:String
-    //     }
-    // ]
+    },
+    reviews: [
+        {
+            userId:
+            {type:mongoose.Schema.ObjectId, ref:'User'},
+            review:String
+        }
+    ]
 
 },{timestamps:true})
 

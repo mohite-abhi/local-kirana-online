@@ -8,6 +8,7 @@ const userRoutes =require('./routes/auth');
 const adminRoutes = require('./routes/admin/auth');
 const env = require('dotenv');
 const categoryRoutes=require('./routes/category')
+const axios = require('axios')
 
 env.config();
 const app = express();
@@ -112,7 +113,25 @@ app.get("/shopitem/:id",async(req,res)=>{
     }
     })
 
-   
+    app.post('/api/ingredientsFromDishName', (req, res) => {
+      var result = []
+      const dishName = req.body.dishName
+      var requertUrl = "https://api.edamam.com/search?q="+dishName+"&app_id=2934760b&app_key=1ebf165ca5f330d5c70bcd44f83aa8ec"
+      axios.get(requertUrl)
+        .then(response => {
+            apiResponse = response.data["hits"][0]["recipe"]["ingredientLines"].join(" ").replace(/([.*+?^=!:${}()|\[\]\/\\\-])/g," ").split(" ")
+            apiResponse.forEach(element => {
+              if (isNaN(element) == true) result.push(element);
+            });
+            console.log(result);
+            res.send(result);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+       
+    
+    });
         
    
 

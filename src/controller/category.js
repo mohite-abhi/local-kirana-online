@@ -1,6 +1,32 @@
 const slugify = require('slugify');
 const Category = require('../models/category')
 
+function createCategories(categories,parentId=null)
+{
+    const categoryList= [];
+    let category;
+    if(parentId== null)
+    {
+        category = categories.filter(cat => cat.parentId == undefined);
+    }
+    else{
+        category = categories.filter(cat=> cat.parentId == parentId);
+    }
+
+    for(let cate of category)
+    {
+        categoryList.push({
+            _id:cate._id,
+            name:cate.name,
+            slug:cate.slug,
+            children: createCategories(categories,cate._id)
+
+        })
+    }
+
+    return categoryList;
+}
+
 exports.addCategory = async(req,res)=>{
     try{
         const catObj ={
@@ -23,8 +49,13 @@ exports.addCategory = async(req,res)=>{
 
 exports.getCategory = async(req,res) =>{
     try{
-        const category = await Category.find({});
-        res.status(200).send(category);
+        const categories = await Category.find({});
+
+        if(categories)
+        {
+            const categoryList = createCategories(categories);
+            res.status(200).send(categoryList);
+        }
     }
     catch(err){
         res.status.send(err);
