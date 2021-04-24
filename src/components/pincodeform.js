@@ -19,39 +19,11 @@ class App extends React.PureComponent {
     onChange = (value) => {
         this.setState({ value });
     };
-    //submit = () => {
-      //  this.callAPI();
-        
-    //};
-     /*getCircularReplacer = () => {
-        const seen = new WeakSet();
-        return (key, value) => {
-          if (typeof value === "object" && value !== null) {
-            if (seen.has(value)) {
-              return;
-            }
-            seen.add(value);
-          }
-          return value;
-        };
-      };*/
-    //submit=()=>  {
-      // this.callAPI();
-    //}    
-         //console.log(value);
-        /*fetch('https://localhost:9000/testApi', {
-                method: 'GET',
-                mode: 'CORS',
-                //body: JSON.stringify(val),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.text())
-            .then(res => this.setState({apiResponse: res}));
-            };*/
-   callAPI(value){
+
+   
+   submit(value){
        console.log(value);
-        fetch("http://localhost:9000/s",{
+        fetch("http://localhost:9000/storesFromLocation",{
             method: 'POST',
            // mode: 'CORS',
             body: JSON.stringify({value:value}),
@@ -59,16 +31,12 @@ class App extends React.PureComponent {
             'Content-Type': 'application/json'
         }
     })
-        .then(res => res.text())
-        .then(res => this.setState({apiResponse: res}))
+        //.then(res => res.text())
+        //.then(res => this.setState({apiResponse: res}))
         ;
 
     }
-  //  componentWillMount(){
-    //    this.callAPI();
-
-
-    //}
+  
     onClear = () => {
         this.setState({
             value: ""
@@ -83,8 +51,7 @@ class App extends React.PureComponent {
                <PinInput
                     length={6}
                     focus
-                    // disabled
-                    //secret/*<p>{this.state.apiResponse}</p>  
+                    
                     ref={(p) => (this.pin = p)}
                     type="numeric"
                     onChange={this.onChange}
@@ -95,7 +62,7 @@ class App extends React.PureComponent {
                 <div>
                 <button onClick={this.onClear}>Clear</button>
                         
-                <button onClick={()=>this.callAPI(value)}> Submit</button>
+                <Link to = "/shop"><button onClick={()=>this.submit(value)}> Submit</button></Link>
                 <p>{this.state.apiResponse}</p> 
                    </div>  
                 
