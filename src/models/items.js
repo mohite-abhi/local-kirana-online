@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 
 
 const itemSchema= new Schema({
-    _id: Schema.Types.ObjectId,
     itemName:{
         type: String,
         required: true,
@@ -27,18 +26,22 @@ const itemSchema= new Schema({
     },
     itemCategory :{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Category'
+        ref:'Category',
+        required: true
     },
-    itemPicture:{
+    itemPicture:[{
         img:{type:String}
-    },
+    }],
     reviews: [
         {
             userId:
             {type:mongoose.Schema.ObjectId, ref:'User'},
             review:String
         }
-    ]
+    ],
+    createdBy: { type:mongoose.Schema.ObjectId, ref:'User'},
+    updatedAt: Date
+
 
 },{timestamps:true})
 
