@@ -6,7 +6,7 @@ const Store = require("./models/shops");
 const Location=require("./models/location");
 const userRoutes =require('./routes/auth');
 const testApi = require('./routes/testapi')
-//const cors = require('cors');
+const cors = require('cors');
 const objpn = null;
 //const sendpin = require('./routes/sendp');
 const adminRoutes = require('./routes/admin/auth');
@@ -17,13 +17,13 @@ const axios = require('axios')
 
 env.config();
 const app = express();
-// const port = process.env.PORT || 9000;
-const port = process.env.PORT || 3000;    
+const port = process.env.PORT || 9000;
+// const port = process.env.PORT || 3000;    
 
 
 
 app.use(express.json());
-//app.use(cors());
+app.use(cors());
 //app.use(express.static('index.js'));
 app.use('',userRoutes);
 app.use('',adminRoutes);
