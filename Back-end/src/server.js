@@ -17,8 +17,8 @@ const axios = require('axios')
 
 env.config();
 const app = express();
-const port = process.env.PORT || 9000;
-// const port = process.env.PORT || 3000;    
+//const port = process.env.PORT || 9000;
+const port = process.env.PORT || 3000;    
 
 
 
@@ -44,6 +44,7 @@ app.post("/customer", async(req,res) => {
   }
   
 })
+
 app.post("/storesFromLocation",function(req,res){
   console.log(req.body);
   console.log(typeof(req.body));
@@ -55,8 +56,8 @@ app.post("/storesFromLocation",function(req,res){
         
  //console.log(storeData);
   res.status(201).json({storeData});
-
 })
+
 
 app.post("/shop",async(req,res) => {
   try{
