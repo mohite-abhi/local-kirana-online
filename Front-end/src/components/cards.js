@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 //import Link from '@material-ui/core/Link';
 import { fade } from '@material-ui/core/styles';
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(6),
     },
-    
+
     inputRoot: {
         color: 'inherit',
     },
@@ -71,7 +71,7 @@ export default function Album() {
     return (
         <React.Fragment>
             <CssBaseline />
-            
+
             <main>
 
                 <Container className={classes.cardGrid} maxWidth="md">
@@ -93,7 +93,7 @@ export default function Album() {
                       </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Link to ="/item"><Button size="small" color="primary">
+                                        <Link to="/item"><Button size="small" color="primary">
                                             View
                       </Button></Link>
                                         <Button size="small" color="primary">

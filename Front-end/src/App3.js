@@ -1,18 +1,26 @@
 import React from "react";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-    function Page1() {
+import {
+    Menu,
+    MenuItem,
+    MenuButton,
+    SubMenu
+} from '@szhsin/react-menu';
+import '@szhsin/react-menu/dist/index.css';
 
-        return (
-          <div>
-            <p>
-              This is the third page.
-              <br />
-              Don't Click on the button below.
-            </p>
-          </div>
-        );
+export default function Example() {
+  return (
+      <Menu menuButton={<MenuButton>Open menu</MenuButton>}>
+          <MenuItem>New File</MenuItem>
+          <SubMenu label="Open">
+              <MenuItem>index.html</MenuItem>
+              <MenuItem>example.js</MenuItem>
+              <MenuItem>about.css</MenuItem>
+          </SubMenu>
+          <MenuItem>Save</MenuItem>
+      </Menu>
+  );
+}
 
-    }
 
-    export default Page1;
