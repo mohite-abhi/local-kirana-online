@@ -1,26 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import './App.css';
+import React from 'react';
+import Dropdown from './components/dropdown_card'
 
-import {
-    Menu,
-    MenuItem,
-    MenuButton,
-    SubMenu
-} from '@szhsin/react-menu';
-import '@szhsin/react-menu/dist/index.css';
-
-export default function Example() {
+function App3() {
   return (
-      <Menu menuButton={<MenuButton>Open menu</MenuButton>}>
-          <MenuItem>New File</MenuItem>
-          <SubMenu label="Open">
-              <MenuItem>index.html</MenuItem>
-              <MenuItem>example.js</MenuItem>
-              <MenuItem>about.css</MenuItem>
-          </SubMenu>
-          <MenuItem>Save</MenuItem>
-      </Menu>
+    <>
+    <Dropdown/>
+    </>
+
   );
 }
-
-
+export default App3;
