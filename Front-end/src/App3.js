@@ -1,13 +1,10 @@
 import './App.css';
 import React from 'react';
-import Dropdown from './components/dropdown_card'
+import TabBar from './components/tabBar'
 
 function App3() {
   return (
-    <>
-    <Dropdown/>
-    </>
-
+    <TabBar/>
   );
 }
 export default App3;
