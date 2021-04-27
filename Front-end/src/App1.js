@@ -1,17 +1,14 @@
-
 //import './App.css';
-import React from 'react';
-import Header from "./components/header"
-import Cards from "./components/cards"
+import React from "react";
+import Header from "./components/header";
+import Cards from "./components/cards";
 
-function App1() {
+function App1({ stores }) {
   return (
     <>
-    <Header/>
-    <Cards/>
+      <Header />
+      <Cards stores={stores} />
     </>
-
   );
 }
 export default App1;
-

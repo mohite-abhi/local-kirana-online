@@ -1,6 +1,6 @@
 import React from "react";
 import PinInput from "react-pin-input";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import fetch from "isomorphic-fetch";
 import ChangeRoute from "./ChangeRoute";
 
@@ -9,7 +9,6 @@ class App extends React.PureComponent {
     super(props);
 
     this.state = {
-      apiResponse: "",
       value: "",
     };
   }
@@ -19,21 +18,8 @@ class App extends React.PureComponent {
 
   submit(value) {
     console.log(value);
-    fetch("http://localhost:9000/storesFromLocations", {
-      method: "POST",
-      body: JSON.stringify({ value: value }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        this.setState({ apiResponse: res }, () => {
-          console.log(this.state.apiResponse);
-        });
-      });
-    this.props.history.push("shop");
+    this.props.onPinChange(value);
+    this.props.history.push("/shop");
   }
 
   onClear = () => {
@@ -65,4 +51,4 @@ class App extends React.PureComponent {
     );
   }
 }
-export default App;
+export default withRouter(App);
