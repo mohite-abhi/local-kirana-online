@@ -13,6 +13,7 @@ export const ItemsInner = ({todos}) => {
                     todos.map((todo) => {
                         return (
                             <div>
+                                console.log('hello')
                                 <h4>{todo.title}</h4>
                                 <p>{todo.desc}</p>
                             </div>
