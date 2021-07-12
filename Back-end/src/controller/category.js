@@ -26,17 +26,17 @@ function createCategories(categories,parentId=null)
 
     return categoryList;
 }
-
+ 
 exports.addCategory = async(req,res)=>{
     try{
         const catObj ={
             name:req.body.name,
             slug:slugify(req.body.name)
         }
-        if(req.body.parentId)
-        {
-            catObj.parentId = req.body.parentId;
-        }
+        // if(req.body.parentId)
+        // {
+        //     catObj.parentId = req.body.parentId;
+        // }
         const cat = new Category(catObj);
         const createCategory = await cat.save();
         res.status(201).json({createCategory});
@@ -61,4 +61,4 @@ exports.getCategory = async(req,res) =>{
         res.status.send(err);
     }
 
-}
+} 

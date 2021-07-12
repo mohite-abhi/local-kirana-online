@@ -8,6 +8,7 @@
 .pnp.js
 Front-end/node_modules/
 Back-end/node_modules/
+Back-end/src/uploads
 
 # testing
 /coverage

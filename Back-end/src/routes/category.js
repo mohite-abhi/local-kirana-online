@@ -6,4 +6,4 @@ const router = express.Router();
 router.post('/category/create',requireSignin,adminMiddleware,addCategory);
 router.get('/category/getCategory',getCategory);
 
-module.exports = router;
+module.exports = router; 

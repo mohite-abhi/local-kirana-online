@@ -2,6 +2,7 @@ const express = require('express');
 require("./dbs/conn");
 const Customer = require("./models/customers");
 const Item = require("./models/items");
+const Category = require("./models/category")
 const Store = require("./models/shops");
 const Location=require("./models/location");
 const userRoutes =require('./routes/auth');
@@ -11,16 +12,19 @@ const objpn = null;
 //const sendpin = require('./routes/sendp');
 const adminRoutes = require('./routes/admin/auth');
 const env = require('dotenv');
-const categoryRoutes=require('./routes/category')
-const itemRoutes = require('./routes/item')
-const axios = require('axios')
+const categoryRoutes=require('./routes/category');
+const itemRoutes = require('./routes/item');
+const cartRoutes = require('./routes/cart');
+const axios = require('axios');
+const shopRoutes = require('./routes/shop')
+
 
 env.config();
 const app = express();
 //const port = process.env.PORT || 9000;
 const port = process.env.PORT || 3000;    
 
-
+ 
 
 app.use(express.json());
 app.use(cors());
@@ -29,6 +33,8 @@ app.use('',userRoutes);
 app.use('',adminRoutes);
 app.use('',categoryRoutes);
 app.use('',itemRoutes);
+app.use('',cartRoutes);
+app.use('',shopRoutes);
 
 
 app.post("/customer", async(req,res) => {
@@ -78,17 +84,17 @@ app.post("/shop",async(req,res) => {
 })
 
 
-app.get("/storesFromLocation",async(req,res)=>{
-try{
-  console.log(req.body);
-  const storeData=await Store.find({pin:req.body.value});
-  res.status(201).json({storeData});
-}
-catch(err)
-{
-  res.status(400).send(err);
-}
-})
+// app.get("/storesFromLocation",async(req,res)=>{
+// try{
+//   console.log(req.body);
+//   const storeData=await Store.find({pin:req.body.value});
+//   res.status(201).json({storeData});
+// }
+// catch(err)
+// {
+//   res.status(400).send(err);
+// }
+// })
 
 // app.get("/storesFromLocation", (req, res) => {
 //         Location
@@ -101,23 +107,30 @@ catch(err)
 
 // })
 
-app.get("/shopitem/:id",async(req,res)=>{
-  try{
-      const _id = req.params.id;
-      console.log(_id);
-      Store
-      .findOne({_id})
-      .populate('itemID')
-      .exec(function (err,item) {
-      if (err) return handleError(err);
-      res.send(item.itemID)
-      });
-  }
-  catch(err)
-  {
-    res.status(400).send(err);
-  }
-  })
+// app.get("/shopitem/:id",async(req,res)=>{
+//   try{
+//       const _id = req.params.id;
+//       console.log(_id);
+//       const categories = await Category.find({});
+//       console.log(categories);
+//       Store
+//       .findOne({_id})
+//       .populate('itemID')
+//       .exec(function (err,item) {
+//       if (err) return handleError(err);
+//       console.log(item.itemIDs);
+//       res.send(item.itemIDs);
+//       res.status(201).json({categories});
+//       });
+//   }
+//   catch(err)
+//   {
+//     res.status(400).send(err);
+//   }
+//   })
+
+
+
 
   app.get("/searchitem/:id",async(req,res)=>{
     try{
@@ -138,6 +151,44 @@ app.get("/shopitem/:id",async(req,res)=>{
     {
       res.status(400).send(err);
     }
+    })
+
+
+    app.get("/subcategory",async(req,res)=>{
+      try{
+        const itemCategory = req.body.itemCategory;
+        const _id = req.body.id;
+        const items = await Item.find({itemCategory});
+       // console.log(items);
+
+        let itemlist = [];
+
+        for(let item of items)
+    {
+      const result = await Store.find({$and : [{itemID :{$in :[item._id]}},{_id}] });
+      console.log(result);
+      if(result.length > 0)
+      {
+        itemlist.push({
+          _id:item._id,
+          itemName:item.itemName,
+          slug:item.slug,
+          itemPrice:item.itemPrice,
+          itemDesc:item.itemDesc,
+          itemQuantity:item.itemQuantity
+      })
+
+      }
+        
+    }
+
+        res.status(201).send(itemlist);
+      }
+      catch(err)
+      {
+        res.status(400).send(err);
+      }
+
     })
 
     app.post('/api/ingredientsFromDishName', (req, res) => {
