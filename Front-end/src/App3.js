@@ -1,18 +1,14 @@
-import React from "react";
-import {Link } from "react-router-dom";
+//import './App.css';
+import Items from './components/Items'
+import React from 'react';
+import TabBar from './components/tabBar'
 
-    function Page1() {
-
-        return (
-          <div>
-            <p>
-              This is the third page.
-              <br />
-              Don't Click on the button below.
-            </p>
-          </div>
-        );
-
-    }
-
-    export default Page1;
+function App3() {
+  return (
+    <>
+    <TabBar/>
+    <Items/>
+    </>
+  );
+}
+export default App3;

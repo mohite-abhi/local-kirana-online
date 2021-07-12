@@ -102,30 +102,6 @@ app.post("/shop", async (req, res) => {
 
 // })
 
-// app.get("/shopitem/:id",async(req,res)=>{
-//   try{
-//       const _id = req.params.id;
-//       console.log(_id);
-//       const categories = await Category.find({});
-//       console.log(categories);
-//       Store
-//       .findOne({_id})
-//       .populate('itemID')
-//       .exec(function (err,item) {
-//       if (err) return handleError(err);
-//       console.log(item.itemIDs);
-//       res.send(item.itemIDs);
-//       res.status(201).json({categories});
-//       });
-//   }
-//   catch(err)
-//   {
-//     res.status(400).send(err);
-//   }
-//   })
-
-
-
 
   app.get("/searchitem/:id",async(req,res)=>{
     try{
@@ -186,26 +162,6 @@ app.post("/shop", async (req, res) => {
 
     });
 
-
-app.get("/searchitem/:id", async (req, res) => {
-  try {
-    const _id = req.params.id;
-    const itemName = req.body.itemName;
-    console.log(itemName);
-    const name = await Item.find({ itemName: itemName });
-    console.log(name[0]._id);
-    const result = await Store.find({
-      $and: [{ itemID: { $in: [name[0]._id] } }, { _id }],
-    });
-    // const search1 = await Store.find({_id});
-    // console.log(search1);
-    // const search2 = await search1.find({itemID :{$in :[name[0]._id]} });
-    // console.log(search2);
-    res.status(201).send(result);
-  } catch (err) {
-    res.status(400).send(err);
-  }
-});
 
 app.post("/api/ingredientsFromDishName", (req, res) => {
   var result = [];

@@ -1,29 +1,23 @@
 import React from "react";
-import './App.css';
+//import "./App.css";
 import Slider from "./components/slider";
 
 import Header from "./components/header";
 import Pin from "./components/pincodeform";
-import {Link } from "react-router-dom";
+import UseGeolocation from './components/geoloc'
 
-    function Page1() {
+import { Link, useHistory } from "react-router-dom";
 
-        return (
-          <>
-          <Header/>
-          <Slider />
-          <Pin/>
-          </>
-          /*<div>
-           
-            <Link to="/shop"><button>
-              Go to Page 2 
-            </button>
-            </Link>
-          </div>*/
-        );
+function Page0({ onPinChange, history }) {
+  return (
+    <>
+      <Header />
+      <Slider />
+      <UseGeolocation/>
+      <Pin onPinChange={onPinChange} history={history} />
+      
+    </>
+  );
+}
 
-    }
-    
-
-    export default Page1;
+export default Page0;
