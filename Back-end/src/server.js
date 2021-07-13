@@ -21,8 +21,8 @@ const shopRoutes = require('./routes/shop')
 
 env.config();
 const app = express();
-//const port = process.env.PORT || 9000;
-const port = process.env.PORT || 3000;    
+const port = process.env.PORT || 9000;
+//const port = process.env.PORT || 3000;    
 
  
 
@@ -47,21 +47,21 @@ app.post("/customer", async (req, res) => {
   }
 });
 
-app.post("/storesFromLocation", function (req, res) {
-  console.log(req.body);
-  console.log(typeof req.body);
-  res.send("API working properly");
-  const storeData = Store.find({ pin: Number(req.body.value) }).exec(function (
-    err,
-    storeData
-  ) {
-    if (err) return handleError(err);
-    console.log(storeData);
-  });
+// app.post("/storesFromLocation", function (req, res) {
+//   console.log(req.body);
+//   console.log(typeof req.body);
+//   res.send("API working properly");
+//   const storeData = Store.find({ pin: Number(req.body.value) }).exec(function (
+//     err,
+//     storeData
+//   ) {
+//     if (err) return handleError(err);
+//     console.log(storeData);
+//   });
 
-  //console.log(storeData);
-  res.status(201).json({ storeData });
-});
+//   //console.log(storeData);
+//   res.status(201).json({ storeData });
+// });
 
 app.post("/shop", async (req, res) => {
   try {
@@ -80,15 +80,15 @@ app.post("/shop", async (req, res) => {
   }
 });
 
-// app.post("/storesFromLocations", async (req, res) => {
-//   try {
-//     console.log(req.body);
-//     const storeData = await Store.find({ pin: req.body.value });
-//     res.status(201).json({ storeData });
-//   } catch (err) {
-//     res.status(400).send(err);
-//   }
-// })
+app.post("/storesFromLocations", async (req, res) => {
+  try {
+    console.log(req.body);
+    const storeData = await Store.find({ pin: req.body.value });
+    res.status(201).json({ storeData });
+  } catch (err) {
+    res.status(400).send(err);
+  }
+})
 
 
 // app.get("/storesFromLocation", (req, res) => {

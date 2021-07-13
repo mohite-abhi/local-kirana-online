@@ -5,6 +5,6 @@ const { requireSignin, adminMiddleware } = require('../middleware/reqsignin');
 
 const router = express.Router();
 
-router.get('/shopitem/:id',getItem);
+router.post('/shopitem/id',getItem);
 
 module.exports = router;

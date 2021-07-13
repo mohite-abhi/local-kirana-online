@@ -4,7 +4,7 @@ const Item = require("../models/items")
  
  exports.getItem = async(req,res)=>{
     try{
-        const _id = req.params.id;
+        const _id = req.body.val;
         console.log(_id);
         Store
         .findOne({_id})
