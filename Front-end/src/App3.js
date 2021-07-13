@@ -1,13 +1,13 @@
 //import './App.css';
-import Items from './components/Items'
-import React from 'react';
-import TabBar from './components/tabBar'
+import Items from "./components/Items";
+import React from "react";
+import TabBar from "./components/tabBar";
 
-function App3() {
+function App3({ items }) {
   return (
     <>
-    <TabBar/>
-    <Items/>
+      <TabBar />
+      <Items items={items} />
     </>
   );
 }

@@ -2,50 +2,58 @@
 import React from "react";
 import Header from "./components/header";
 import Cards from "./components/cards";
+import App3 from "./App3";
 //import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 //variable pakeibi store id store karibaku
 import { useCallback, useState } from "react";
-import { PropTypes, Component } from 'react'
-function App1({ stores }) {
+import { PropTypes, Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+  useRouteMatch,
+} from "react-router-dom";
 
-  // state = {message : ""}
-  // callbackFunction = (childData) => {
-  //   setState({message:childData})
-  // },
+function App1({ stores }) {
+  let history = useHistory();
+  let { path, url } = useRouteMatch();
   const [shopid, setShopid] = useState("");
-  const [item, setItem] = useState([]);
-  const callback = (val) =>{
+  const [items, setItems] = useState([]);
+  const callback = (val) => {
     setShopid(val);
-    console.log(val);
     fetch("http://localhost:9000/shopitem/id", {
       method: "POST",
       body: JSON.stringify({ val: val }),
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res); 
-        onItemUpdate(res.storeData);
+        onItemUpdate(res);
       });
+    history.push(`${url}/item`);
   };
   const onItemUpdate = (data) => {
-    setItem(data);
+    setItems(data);
   };
 
- 
   let props = {
-    stores : stores,
-    callback : callback
-  }
- 
+    stores: stores,
+    callback: callback,
+  };
   return (
-    <>
-      <Header />
-      <Cards props={props} />
-    
-    </>
+    <Switch>
+      <Route exact path={path}>
+        <Header />
+        <Cards props={props} />
+      </Route>
+      <Route path={`${path}/item`}>
+        <App3 items={items}></App3>
+      </Route>
+    </Switch>
   );
 }
 export default App1;

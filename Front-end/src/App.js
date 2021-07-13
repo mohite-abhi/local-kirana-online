@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 
 import Page0 from "./App0";
 import App1 from "./App1";
-import Page2 from "./App3";
 
 function App() {
   const [pin, setPin] = useState("");
@@ -13,7 +12,6 @@ function App() {
 
   const onPinChange = (value) => {
     setPin(value);
-    console.log(value);
     fetch("http://localhost:9000/storesFromLocations", {
       method: "POST",
       body: JSON.stringify({ value: value }),
@@ -23,7 +21,6 @@ function App() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res); 
         onStoreChange(res.storeData);
       });
   };
@@ -38,9 +35,6 @@ function App() {
         </Route>
         <Route path="/shop">
           <App1 stores={stores} />
-        </Route>
-        <Route path="/item">
-          <Page2 />
         </Route>
       </Switch>
     </BrowserRouter>

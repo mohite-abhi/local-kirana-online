@@ -1,27 +1,19 @@
-import React from 'react'
+import React from "react";
 
+export const ItemsInner = ({ items }) => {
+  console.log(items);
+  return (
+    <div className="container" key={items.sno}>
+      <h3 className=" my-3">items List</h3>
 
-
-export const ItemsInner = ({todos}) => {
-    console.log(todos)
-    return (
-        <div className="container" key={todos.sno}>
-            <h3 className=" my-3" >Todos List</h3>
-
-            {
-                
-                    todos.map((todo) => {
-                        return (
-                            <div>
-                                
-                                <h4>{todo.title}</h4>
-                                <p>{todo.desc}</p>
-                            </div>
-                        )
-                    })
-                
-            }
-
-        </div>
-    )
-}
+      {items.map((item) => {
+        return (
+          <div key={item._id}>
+            <h4>{item.itemName}</h4>
+            <p>{item.itemDesc}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
