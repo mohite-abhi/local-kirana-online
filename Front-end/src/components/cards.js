@@ -12,7 +12,8 @@ import Container from "@material-ui/core/Container";
 //import Link from '@material-ui/core/Link';
 import { fade } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-
+import {useCallback , useState} from "react";
+import { PropTypes, Component } from 'react'
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -64,10 +65,17 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+// const Counter =  ({parentCallback}) => 
+// {
+//   const[shopid,setShopid] = useState[0];
 
-export default function Album({ stores }) {
+
+// }
+export default function Album( {props} ) {
+ // console.log(props);
   const classes = useStyles();
-  const storeCards = stores.map((card) => (
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+  const storeCards = props.stores.map((card) => (
     <Grid item key={card.itemID} xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardMedia
@@ -84,7 +92,9 @@ export default function Album({ stores }) {
         </CardContent>
         <CardActions>
           <Link to="/item">
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" onClick={() => {
+              
+              props.callback(card._id)}}>
               View
             </Button>
           </Link>
