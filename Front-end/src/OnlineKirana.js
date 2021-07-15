@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 
-import Page0 from "./App0";
-import App1 from "./App1";
+import WelcomePage from "./WelcomePage";
+import StorePage from "./StorePage";
 
-function App() {
+function OnlineKirana() {
   const [pin, setPin] = useState("");
   let history = useHistory();
   const [stores, setStores] = useState([]);
@@ -31,14 +31,14 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Page0 onPinChange={onPinChange} history={history} />
+          <WelcomePage onPinChange={onPinChange} history={history} />
         </Route>
         <Route path="/shop">
-          <App1 stores={stores} />
+          <StorePage stores={stores} />
         </Route>
       </Switch>
     </BrowserRouter>
   );
 }
 
-export default App;
+export default OnlineKirana;

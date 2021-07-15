@@ -1,32 +1,44 @@
 import React from "react";
 import { Menu, MenuItem, SubMenu } from "@szhsin/react-menu";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
+
 import "@szhsin/react-menu/dist/index.css";
 
-export default function dropdown(props) {
-  let menuItems = [];
-  for (var element in props.menuItems) {
-    if (props.menuItems[element].length !== 0) {
-      let menuItemSubitems = [];
-    props.menuItems[element].forEach(subElement => {
-        menuItemSubitems.push(<MenuItem>{subElement}</MenuItem>);
-    });
-      menuItems.push(<SubMenu label={element}>{menuItemSubitems}</SubMenu>);
-    } else {
-      menuItems.push(<MenuItem>{element}</MenuItem>);
-    }
+function Dropdown({ menuName, menuItems, shopid, itemChange }) {
 
-  }
+  let showItems = function (value) {
+    let itemCategory = menuItemsList[value].slice(0, 24);
+    // alert(this.shopid);
+    fetch("http://localhost:9000/subcategory", {
+      method: "POST",
+      body: JSON.stringify({ itemCategory: itemCategory, shopId: shopid }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        itemChange(res);
+      });
+  };
+
+  let menuItemsList = Object.keys(menuItems);
+  let menuItemsHtml = Object.keys(menuItems).map((element, i) => (
+    <MenuItem onClick={(e) => showItems(i)}>{element.slice(25)}</MenuItem>
+  ));
+
   return (
     <Menu
       menuButton={
-      <Button variant="contained" color="primary">
-  {props.menuName}
-</Button>
+        <Button variant="contained" color="primary">
+          {menuName}
+        </Button>
       }
       position="static"
     >
-      {menuItems}
+      {menuItemsHtml}
     </Menu>
   );
 }
+
+export default Dropdown;

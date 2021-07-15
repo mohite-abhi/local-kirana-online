@@ -6,7 +6,7 @@ import Header from "./components/header";
 import Pin from "./components/pincodeform";
 import UseGeolocation from "./components/geoloc";
 
-function Page0({ onPinChange, history }) {
+function WelcomePage({ onPinChange, history }) {
   return (
     <>
       <Header />
@@ -17,4 +17,4 @@ function Page0({ onPinChange, history }) {
   );
 }
 
-export default Page0;
+export default WelcomePage;

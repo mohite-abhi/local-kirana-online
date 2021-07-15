@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "./components/header";
 import Cards from "./components/cards";
-import App3 from "./App3";
+import ItemPage from "./ItemPage";
 //import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 //variable pakeibi store id store karibaku
 import { useCallback, useState } from "react";
@@ -16,29 +16,15 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 
-function App1({ stores }) {
+function StorePage({ stores }) {
   let history = useHistory();
   let { path, url } = useRouteMatch();
   const [shopid, setShopid] = useState("");
-  const [items, setItems] = useState([]);
   const callback = (val) => {
     setShopid(val);
-    fetch("http://localhost:9000/shopitem/id", {
-      method: "POST",
-      body: JSON.stringify({ val: val }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        onItemUpdate(res);
-      });
     history.push(`${url}/item`);
   };
-  const onItemUpdate = (data) => {
-    setItems(data);
-  };
+
 
   let props = {
     stores: stores,
@@ -51,9 +37,9 @@ function App1({ stores }) {
         <Cards props={props} />
       </Route>
       <Route path={`${path}/item`}>
-        <App3 items={items}></App3>
+        <ItemPage shopid={shopid}></ItemPage>
       </Route>
     </Switch>
   );
 }
-export default App1;
+export default StorePage;

@@ -68,7 +68,7 @@ app.post("/shop", async (req, res) => {
     // var pin = req.body.value;
     //console.log("pin = "+pin);
     console.log(req.body.shop);
-    console.log("hello");
+    // console.log("hello");
     console.log(req.body.item);
     const store = new Store(req.body.shop);
     const createStore = await store.save();
@@ -125,10 +125,10 @@ app.post("/storesFromLocations", async (req, res) => {
     });
 
 
-    app.get("/subcategory",async(req,res)=>{
+    app.post("/subcategory",async(req,res)=>{
       try{
         const itemCategory = req.body.itemCategory;
-        const _id = req.body.id;
+        const _id = req.body.shopId;
         const items = await Item.find({itemCategory});
        // console.log(items);
 
@@ -137,7 +137,7 @@ app.post("/storesFromLocations", async (req, res) => {
         for(let item of items)
     {
       const result = await Store.find({$and : [{itemID :{$in :[item._id]}},{_id}] });
-      console.log(result);
+      // console.log(result);
       if(result.length > 0)
       {
         itemlist.push({
@@ -180,7 +180,7 @@ app.post("/api/ingredientsFromDishName", (req, res) => {
       apiResponse.forEach((element) => {
         if (isNaN(element) == true) result.push(element);
       });
-      console.log(result);
+      // console.log(result);
       res.send(result);
     })
     .catch((error) => {
