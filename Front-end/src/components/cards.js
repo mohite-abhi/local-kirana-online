@@ -64,14 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-// const Counter =  ({parentCallback}) =>
-// {
-//   const[shopid,setShopid] = useState[0];
-
-// }
 export default function Album({ props }) {
-  // console.log(props);
   const classes = useStyles();
 
   const storeCards = props.stores.map((card) => (
