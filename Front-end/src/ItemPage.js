@@ -3,6 +3,7 @@ import Items from "./components/Items";
 import React from "react";
 import TabBar from "./components/tabBar";
 import {useState } from "react";
+import Checkout from "./components/Checkout";
 
 function ItemPage({ shopid }) {
   let [newItem, setNewItem] = useState([]);
@@ -33,6 +34,7 @@ function ItemPage({ shopid }) {
     <>
       <TabBar shopid={shopid} itemChange={itemChange}/>
       <Items items={newItem} />
+     
     </>
   );
 }
