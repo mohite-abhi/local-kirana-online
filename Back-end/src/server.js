@@ -38,21 +38,21 @@ app.post("/customer", async (req, res) => {
   }
 });
 
-app.post("/storesFromLocation", function (req, res) {
-  console.log(req.body);
-  console.log(typeof req.body);
-  res.send("API working properly");
-  const storeData = Store.find({ pin: Number(req.body.value) }).exec(function (
-    err,
-    storeData
-  ) {
-    if (err) return handleError(err);
-    console.log(storeData);
-  });
+// app.post("/storesFromLocation", function (req, res) {
+//   console.log(req.body);
+//   console.log(typeof req.body);
+//   res.send("API working properly");
+//   const storeData = Store.find({ pin: Number(req.body.value) }).exec(function (
+//     err,
+//     storeData
+//   ) {
+//     if (err) return handleError(err);
+//     console.log(storeData);
+//   });
 
-  //console.log(storeData);
-  res.status(201).json({ storeData });
-});
+//console.log(storeData);
+// res.status(201).json({ storeData });
+
 
 app.post("/shop", async (req, res) => {
   try {
