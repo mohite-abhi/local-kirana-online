@@ -29,9 +29,13 @@ const itemSchema= new Schema({
         ref:'Category',
         required: true
     },
-    itemPicture:[{
-        img:{type:String}
-    }],
+    itemQuantity :{
+        type: String,
+        required : true
+    }, 
+    // itemPicture:[{
+    //     img:{type:String}
+    // }],
     reviews: [
         {
             userId:
@@ -46,4 +50,4 @@ const itemSchema= new Schema({
 },{timestamps:true})
 
 const Item = new mongoose.model("Item",itemSchema);
-module.exports = Item;
+module.exports = Item; 

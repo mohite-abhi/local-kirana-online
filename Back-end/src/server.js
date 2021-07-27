@@ -2,6 +2,7 @@ const express = require("express");
 require("./dbs/conn");
 const Customer = require("./models/customers");
 const Item = require("./models/items");
+const Category = require("./models/category")
 const Store = require("./models/shops");
 const Location = require("./models/location");
 const userRoutes = require("./routes/auth");
@@ -9,23 +10,31 @@ const testApi = require("./routes/testapi");
 const cors = require("cors");
 const objpn = null;
 //const sendpin = require('./routes/sendp');
-const adminRoutes = require("./routes/admin/auth");
-const env = require("dotenv");
-const categoryRoutes = require("./routes/category");
-const itemRoutes = require("./routes/item");
-const axios = require("axios");
+const adminRoutes = require('./routes/admin/auth');
+const env = require('dotenv');
+const categoryRoutes=require('./routes/category');
+const itemRoutes = require('./routes/item');
+const cartRoutes = require('./routes/cart');
+const axios = require('axios');
+const shopRoutes = require('./routes/shop')
+
 
 env.config();
 const app = express();
 const port = process.env.PORT || 9000;
+//const port = process.env.PORT || 3000;    
+
+ 
 
 app.use(express.json());
 app.use(cors());
 //app.use(express.static('index.js'));
-app.use("", userRoutes);
-app.use("", adminRoutes);
-app.use("", categoryRoutes);
-app.use("", itemRoutes);
+app.use('',userRoutes);
+app.use('',adminRoutes);
+app.use('',categoryRoutes);
+app.use('',itemRoutes);
+app.use('',cartRoutes);
+app.use('',shopRoutes);
 
 app.post("/customer", async (req, res) => {
   try {
@@ -50,22 +59,22 @@ app.post("/customer", async (req, res) => {
 //     console.log(storeData);
 //   });
 
-//console.log(storeData);
-// res.status(201).json({ storeData });
-
+//   //console.log(storeData);
+//   res.status(201).json({ storeData });
+// });
 
 app.post("/shop", async (req, res) => {
   try {
     // var pin = req.body.value;
     //console.log("pin = "+pin);
     console.log(req.body.shop);
-    console.log("hello");
+    // console.log("hello");
     console.log(req.body.item);
     const store = new Store(req.body.shop);
     const createStore = await store.save();
     res.status(201).send(createStore);
-    const createItem = await Item.insertMany(req.body.item);
-    res.status(201).send(createItem);
+    //const createItem = await Item.insertMany(req.body.item);
+    //res.status(201).send(createItem);
   } catch (err) {
     res.status(400).send(err);
   }
@@ -79,7 +88,8 @@ app.post("/storesFromLocations", async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-});
+})
+
 
 // app.get("/storesFromLocation", (req, res) => {
 //         Location
@@ -92,40 +102,66 @@ app.post("/storesFromLocations", async (req, res) => {
 
 // })
 
-app.get("/shopitem/:id", async (req, res) => {
-  try {
-    const _id = req.params.id;
-    console.log(_id);
-    Store.findOne({ _id })
-      .populate("itemID")
-      .exec(function (err, item) {
-        if (err) return handleError(err);
-        res.send(item.itemID);
-      });
-  } catch (err) {
-    res.status(400).send(err);
-  }
-});
 
-app.get("/searchitem/:id", async (req, res) => {
-  try {
-    const _id = req.params.id;
-    const itemName = req.body.itemName;
-    console.log(itemName);
-    const name = await Item.find({ itemName: itemName });
-    console.log(name[0]._id);
-    const result = await Store.find({
-      $and: [{ itemID: { $in: [name[0]._id] } }, { _id }],
+  app.get("/searchitem/:id",async(req,res)=>{
+    try{
+        const _id = req.params.id;
+        const itemName= req.body.itemName;
+        console.log(itemName);
+        const name = await Item.find({itemName:itemName});
+        console.log(name[0]._id);
+        const result = await Store.find({$and : [{itemID :{$in :[name[0]._id]}},{_id}] });
+        // const search1 = await Store.find({_id});
+        // console.log(search1);
+        // const search2 = await search1.find({itemID :{$in :[name[0]._id]} }); 
+        // console.log(search2);
+         res.status(201).send(result);
+
+    }
+    catch(err)
+    {
+      res.status(400).send(err);
+    }
     });
-    // const search1 = await Store.find({_id});
-    // console.log(search1);
-    // const search2 = await search1.find({itemID :{$in :[name[0]._id]} });
-    // console.log(search2);
-    res.status(201).send(result);
-  } catch (err) {
-    res.status(400).send(err);
-  }
-});
+
+
+    app.post("/subcategory",async(req,res)=>{
+      try{
+        const itemCategory = req.body.itemCategory;
+        const _id = req.body.shopId;
+        const items = await Item.find({itemCategory});
+       // console.log(items);
+
+        let itemlist = [];
+
+        for(let item of items)
+    {
+      const result = await Store.find({$and : [{itemID :{$in :[item._id]}},{_id}] });
+      // console.log(result);
+      if(result.length > 0)
+      {
+        itemlist.push({
+          _id:item._id,
+          itemName:item.itemName,
+          slug:item.slug,
+          itemPrice:item.itemPrice,
+          itemDesc:item.itemDesc,
+          itemQuantity:item.itemQuantity
+      })
+
+      }
+        
+    }
+
+        res.status(201).send(itemlist);
+      }
+      catch(err)
+      {
+        res.status(400).send(err);
+      }
+
+    });
+
 
 app.post("/api/ingredientsFromDishName", (req, res) => {
   var result = [];
@@ -144,7 +180,7 @@ app.post("/api/ingredientsFromDishName", (req, res) => {
       apiResponse.forEach((element) => {
         if (isNaN(element) == true) result.push(element);
       });
-      console.log(result);
+      // console.log(result);
       res.send(result);
     })
     .catch((error) => {
@@ -153,3 +189,4 @@ app.post("/api/ingredientsFromDishName", (req, res) => {
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+

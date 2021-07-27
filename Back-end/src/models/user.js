@@ -59,7 +59,7 @@ const userSchema = new Schema({
 
 userSchema.virtual('password')
 .set(function(password){
-    console.log(password);
+    // console.log(password);
     this.hash_password = bcrypt.hashSync(password,10);
 })
 

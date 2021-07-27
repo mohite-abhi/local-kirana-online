@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const { signup, signin, requireSignin } = require("../../controller/admin/auth");
+const { signup, signin } = require("../../controller/admin/auth");
+const {requireSignin} = require("../../middleware/reqsignin")
 
 router.post('/admin/signup',signup);
 

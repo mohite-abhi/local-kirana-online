@@ -1,13 +1,12 @@
 const Item = require('../models/items')
-const shortid = require('shortid')
 const slugify = require('slugify')
 exports.createItem = async(req,res)=>{
     //res.status(200).json({file:req.file, body:req.body})
 
    try{
-    const {itemName,itemPrice,itemDesc,itemCategory} =req.body;
-    let itemPicture;
-    itemPicture = {img: req.file.filename};
+    const {itemName,itemPrice,itemDesc,itemCategory,itemQuantity} = req.body;
+    //let itemPicture;
+    //itemPicture = {img: req.file.filename};
     // let itemPicture = [];
     // if(req.files.length > 0)
     // {
@@ -24,7 +23,8 @@ exports.createItem = async(req,res)=>{
      itemPrice,
      itemDesc,
      itemCategory,
-     itemPicture,
+     itemQuantity,
+     //itemPicture,
      createdBy:req.user._id
     })
  
@@ -39,4 +39,4 @@ exports.createItem = async(req,res)=>{
    }
 
 
-}
+}   

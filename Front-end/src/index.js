@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDom from "react-dom";
-import App from "./App";
+import OnlineKirana from "./OnlineKirana";
 
-ReactDom.render(<App />, document.querySelector("#root"));
+ReactDom.render(<OnlineKirana />, document.querySelector("#root"));

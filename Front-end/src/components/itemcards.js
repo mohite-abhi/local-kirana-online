@@ -64,10 +64,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-export default function Album({ props }) {
+
+// const Counter =  ({parentCallback}) =>
+// {
+//   const[shopid,setShopid] = useState[0];
+
+// }
+export default function Album({ items }) {
+  // console.log(props);
   const classes = useStyles();
 
-  const storeCards = props.stores.map((card) => (
+  const storeCards = items.map((card) => (
     <Grid item key={card.itemID} xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardMedia

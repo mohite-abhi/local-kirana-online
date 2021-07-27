@@ -25,7 +25,7 @@ exports.signin = async(req,res) =>{
         if(user)
         {
             if(user.authenticate(req.body.password)){
-                const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'2h'});
+                const token = jwt.sign({_id:user._id,role:user.role},process.env.JWT_SECRET,{expiresIn:'2h'});
                 const {_id,firstName,lastName,email,fullName} = user;
                 res.status(200).json({
                     token,
@@ -43,4 +43,3 @@ exports.signin = async(req,res) =>{
          res.status(400).send(err);
      }
 }
-
