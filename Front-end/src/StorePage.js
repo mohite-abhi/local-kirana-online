@@ -7,7 +7,6 @@ import ItemPage from "./ItemPage";
 //variable pakeibi store id store karibaku
 import { useCallback, useState } from "react";
 import { PropTypes, Component } from "react";
-import Checkout from "./components/Checkout"
 import {
   BrowserRouter as Router,
   Switch,
@@ -45,10 +44,6 @@ function StorePage({ pin }) {
     setShopid(val);
     history.push(`${url}/item`);
   };
-  const goCheckout = () => {
-    history.push(`${url}/checkout`);
-  };
-
 
 
 
@@ -90,10 +85,6 @@ function StorePage({ pin }) {
       </Route>
       <Route path={`${path}/item`}>
         <ItemPage shopid={shopid}></ItemPage>
-      <button onClick = {()=>goCheckout()}>Checkout</button>
-      </Route>
-      <Route path={`${path}/checkout`}>
-        <Checkout/>
       </Route>
 
     </Switch>

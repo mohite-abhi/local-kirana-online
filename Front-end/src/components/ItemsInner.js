@@ -61,8 +61,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const onItemAdd = (item) => {
-  console.log(localStorage.getItem(item._id));
+
+const syncCartWithLocalStorage = (reloadCartItems) =>{
+  let ourCart = {}
+  Object.entries(localStorage).map((item)=>{
+    if (item[0].length === 24){
+      ourCart[item[0]] = JSON.parse(item[1]);
+    }
+  })
+  reloadCartItems(ourCart);
+}
+
+
+const onItemAdd = (item, reloadCartItems) => {
   const newObj = {
     itemPrice: item.itemPrice,
     itemName: item.itemName,
@@ -72,10 +83,10 @@ const onItemAdd = (item) => {
       : 1,
   };
   localStorage.setItem(item._id, JSON.stringify(newObj));
-  console.log(localStorage);
+  syncCartWithLocalStorage(reloadCartItems);
 };
 
-const onItemRemove = (item) => {
+const onItemRemove = (item, reloadCartItems) => {
   if (localStorage.getItem(item._id)) {
     // alert(JSON.stringify(item))
     if (JSON.parse(localStorage.getItem(item._id)).itemQty === 1)
@@ -90,40 +101,29 @@ const onItemRemove = (item) => {
       localStorage.setItem(item._id, JSON.stringify(newObj));
     }
   }
-  console.log(localStorage);
+  syncCartWithLocalStorage(reloadCartItems);
 };
 
 
 function initializeItemQuantities(id){
   if (localStorage.getItem(id)){
-    return JSON.parse(localStorage.getItem(id)).itemQty
+    return JSON.parse(localStorage.getItem(id)).itemQty;
     } 
   else{
     return 0
   } 
 }
 
-export const ItemsInner = ({ items }) => {
+export const ItemsInner = ({ items, cartItems, reloadCartItems}) => {
+  // alert(JSON.stringify(cartItems["60ec16388ea9c10f4882100f"].itemQty));
   const [itemQuantity, setItemQuatinty] = useState({});
   console.log(itemQuantity);
-  const ItemsChange = (id, defaultValue) => {
-    // alert(localStorage.getItem(id))
-    if (localStorage.getItem(id))
-      setItemQuatinty({
-        ...itemQuantity,
-        [id]: JSON.parse(localStorage.getItem(id)).itemQty,
-      });
-    else
-      setItemQuatinty({
-        ...itemQuantity,
-        [id]: defaultValue,
-      });
-  };
+
   const classes = useStyles();
   const storeCards = items.map((item) => {
     return (
-      <Grid item key={item._id} xs={12} sm={6} md={4}>
-        <Card className={classes.card}>
+      <Grid item key={item._id} xs={19} sm={6} md={4}>
+        <Card className={classes.card} >
           <CardMedia
             className={classes.cardMedia}
             image="https://source.unsplash.com/random"
@@ -133,7 +133,7 @@ export const ItemsInner = ({ items }) => {
             <Typography gutterBottom variant="h5" component="h2">
               {item.itemName}
             </Typography>
-            <Typography>PRICE -{item.itemPrice} Rs</Typography>
+            <Typography>₹ {item.itemPrice}</Typography>
             <Typography>{item.itemDesc}</Typography>
           </CardContent>
           <CardActions>
@@ -143,8 +143,7 @@ export const ItemsInner = ({ items }) => {
             >
               <Button
                 onClick={() => {
-                  onItemRemove(item);
-                  ItemsChange(item._id, 0);
+                  onItemRemove(item, reloadCartItems);
                 }}
               >
                 <Remove />
@@ -152,8 +151,7 @@ export const ItemsInner = ({ items }) => {
               <Button disabled>{initializeItemQuantities(item._id)}</Button>
               <Button
                 onClick={() => {
-                  onItemAdd(item);
-                  ItemsChange(item._id, 1);
+                  onItemAdd(item, reloadCartItems);
                 }}
               >
                 <Add />
