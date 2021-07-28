@@ -12,7 +12,7 @@ export const login = (user) => {
             ...user
         });
 
-        if (res.status === 200) {
+        if(res.status === 200) {
             const { token, user } = res.data;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
@@ -22,8 +22,7 @@ export const login = (user) => {
                     token, user
                 }
             });
-        }
-        else {
+        }else {
             if (res.status === 400) {
                 dispatch({
                     type: authConstants.LOGIN_FAILURE,

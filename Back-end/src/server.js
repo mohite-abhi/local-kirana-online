@@ -5,6 +5,7 @@ const Item = require("./models/items");
 const Category = require("./models/category")
 const Store = require("./models/shops");
 const Location = require("./models/location");
+const Order = require("./models/order");
 const userRoutes = require("./routes/auth");
 const testApi = require("./routes/testapi");
 const cors = require("cors");
@@ -17,7 +18,6 @@ const itemRoutes = require('./routes/item');
 const cartRoutes = require('./routes/cart');
 const axios = require('axios');
 const shopRoutes = require('./routes/shop')
-
 
 env.config();
 const app = express();
@@ -40,6 +40,17 @@ app.post("/customer", async (req, res) => {
   try {
     console.log(req.body);
     const user = new Customer(req.body);
+    const createUser = await user.save();
+    res.status(201).send(createUser);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+app.post("/orderSave", async (req, res) => {
+  try {
+    console.log(req.body);
+    const user = new Order(req.body);
     const createUser = await user.save();
     res.status(201).send(createUser);
   } catch (err) {

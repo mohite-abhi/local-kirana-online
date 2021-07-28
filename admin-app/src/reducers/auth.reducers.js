@@ -5,7 +5,9 @@ const initState = {
     user: {
         firstName: '',
         lastName: '',
+        userName: '',
         email: '',
+        phone: '',
         picture: ''
     },
     authenticate: false,

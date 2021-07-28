@@ -9,7 +9,22 @@ exports.signup = async(req,res)=>{
     {
         return res.status(400).send("Admin already registered");
     }
-const userData = new User(req.body);
+
+const role = 'admin';
+const {firstName, lastName, userName, password, email, phone} = req.body;
+const userData = new User({
+    firstName, 
+    lastName, 
+    userName, 
+    password, 
+    email, 
+    phone, 
+    role
+   })
+
+   
+
+// const userData = new User(req.body);
 const createUser = await userData.save();
 res.status(201).send("Admin created Successfully");
 
