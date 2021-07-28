@@ -17,10 +17,30 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 
-function StorePage({ stores }) {
+
+
+
+function loadSave(localVarName, toSave){
+  let localItem = localStorage.getItem(localVarName);
+  if (localItem == null || (localItem !== toSave && toSave !== '')){
+    localStorage.setItem(localVarName, toSave);
+    return toSave;
+  }
+  else {
+    return localItem;
+  }
+}
+
+
+function StorePage({ pin }) {
+
+  let pinLoaded = loadSave('pin', pin);
+
   let history = useHistory();
   let { path, url } = useRouteMatch();
   const [shopid, setShopid] = useState("");
+  const [stores, setStores] = useState([]);
+
   const callback = (val) => {
     setShopid(val);
     history.push(`${url}/item`);
@@ -28,6 +48,35 @@ function StorePage({ stores }) {
   const goCheckout = () => {
     history.push(`${url}/checkout`);
   };
+
+
+
+
+  let [initializing, initialization] = useState("yes");
+  if (initializing === "yes"){
+
+
+     fetch("http://localhost:9000/storesFromLocations", {
+      method: "POST",
+      body: JSON.stringify({ value: pinLoaded }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        onStoreChange(res.storeData);
+      });
+
+  const onStoreChange = (data) => {
+    setStores(data);
+  };
+
+
+
+  initialization("done");
+  }
+
 
   let props = {
     stores: stores,

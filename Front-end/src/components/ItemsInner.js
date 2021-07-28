@@ -77,6 +77,7 @@ const onItemAdd = (item) => {
 
 const onItemRemove = (item) => {
   if (localStorage.getItem(item._id)) {
+    // alert(JSON.stringify(item))
     if (JSON.parse(localStorage.getItem(item._id)).itemQty === 1)
       localStorage.removeItem(item._id);
     else {
@@ -92,10 +93,21 @@ const onItemRemove = (item) => {
   console.log(localStorage);
 };
 
+
+function initializeItemQuantities(id){
+  if (localStorage.getItem(id)){
+    return JSON.parse(localStorage.getItem(id)).itemQty
+    } 
+  else{
+    return 0
+  } 
+}
+
 export const ItemsInner = ({ items }) => {
   const [itemQuantity, setItemQuatinty] = useState({});
   console.log(itemQuantity);
   const ItemsChange = (id, defaultValue) => {
+    // alert(localStorage.getItem(id))
     if (localStorage.getItem(id))
       setItemQuatinty({
         ...itemQuantity,
@@ -137,7 +149,7 @@ export const ItemsInner = ({ items }) => {
               >
                 <Remove />
               </Button>
-              <Button disabled>{itemQuantity[item._id] || 0}</Button>
+              <Button disabled>{initializeItemQuantities(item._id)}</Button>
               <Button
                 onClick={() => {
                   onItemAdd(item);
