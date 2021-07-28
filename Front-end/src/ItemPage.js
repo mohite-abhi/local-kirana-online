@@ -5,17 +5,34 @@ import TabBar from "./components/tabBar";
 import {useState } from "react";
 import Checkout from "./components/Checkout";
 
+
+function loadSave(localVarName, toSave){
+  let localItem = localStorage.getItem(localVarName);
+  if (localItem == null || (localItem !== toSave && toSave !== '')){
+    localStorage.setItem(localVarName, toSave);
+    return toSave;
+  }
+  else {
+    return localItem;
+  }
+}
+
+
 function ItemPage({ shopid }) {
+
+  let shopidLoaded = loadSave('shopid', shopid);
+
+
   let [newItem, setNewItem] = useState([]);
-  let [virgin, fuck] = useState("yes");
+  let [initializing, initialization] = useState("yes");
   function itemChange(data){
     setNewItem(data);
   }
 
-  if (virgin === "yes"){
+  if (initializing === "yes"){
     fetch("http://localhost:9000/shopitem/id", {
       method: "POST",
-      body: JSON.stringify({ val: shopid }),
+      body: JSON.stringify({ val: shopidLoaded }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -24,7 +41,7 @@ function ItemPage({ shopid }) {
     .then((res) => {
       setNewItem(res);
     });
-  fuck("hard");
+  initialization("done");
   }
 
 
@@ -32,7 +49,7 @@ function ItemPage({ shopid }) {
 
   return (
     <>
-      <TabBar shopid={shopid} itemChange={itemChange}/>
+      <TabBar shopid={shopidLoaded} itemChange={itemChange}/>
       <Items items={newItem} />
      
     </>

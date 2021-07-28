@@ -8,25 +8,25 @@ import StorePage from "./StorePage";
 function OnlineKirana() {
   const [pin, setPin] = useState("");
   let history = useHistory();
-  const [stores, setStores] = useState([]);
+  // const [stores, setStores] = useState([]);
 
   const onPinChange = (value) => {
     setPin(value);
-    fetch("http://localhost:9000/storesFromLocations", {
-      method: "POST",
-      body: JSON.stringify({ value: value }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        onStoreChange(res.storeData);
-      });
+    // fetch("http://localhost:9000/storesFromLocations", {
+    //   method: "POST",
+    //   body: JSON.stringify({ value: value }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     onStoreChange(res.storeData);
+    //   });
   };
-  const onStoreChange = (data) => {
-    setStores(data);
-  };
+  // const onStoreChange = (data) => {
+  //   setStores(data);
+  // };
   return (
     <BrowserRouter>
       <Switch>
@@ -34,7 +34,7 @@ function OnlineKirana() {
           <WelcomePage onPinChange={onPinChange} history={history} />
         </Route>
         <Route path="/shop">
-          <StorePage stores={stores} />
+          <StorePage pin={pin} />
         </Route>
       </Switch>
     </BrowserRouter>
