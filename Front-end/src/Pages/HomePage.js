@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 
-import WelcomePage from "./WelcomePage";
+// import WelcomePage from "./WelcomePage";
 import StorePage from "./StorePage";
+
+import Slider from "../components/Slide/Slider";
+
+import Header from "../components/Fixed/Header";
+import Pin from "../components/Home/PincodeForm";
+import UseGeolocation from "../components/Home/Geoloc";
+
 
 function OnlineKirana() {
   const [pin, setPin] = useState("");
@@ -31,7 +38,11 @@ function OnlineKirana() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <WelcomePage onPinChange={onPinChange} history={history} />
+          {/* <WelcomePage onPinChange={onPinChange} history={history} /> */}
+           <Header />
+          <Slider />
+          <UseGeolocation />
+          <Pin onPinChange={onPinChange} history={history} />
         </Route>
         <Route path="/shop">
           <StorePage pin={pin} />

@@ -1,10 +1,11 @@
 //import './App.css';
-import Items from "./components/Items";
+import Items from "../components/Item/Items";
 import React from "react";
-import TabBar from "./components/tabBar";
+import TabBar from "../components/ItemCategory/TabBar";
 import {useState } from "react";
-import Checkout from "./components/Checkout";
-import {SideCartBlock} from "./components/SideCartBlock";
+import Checkout from "../components/Checkout/Checkout";
+import {SideCartBlock} from "../components/SideCart/SideCartBlock";
+import Header from "../components/Fixed/Header";
 import {
   BrowserRouter as Router,
   Switch,
@@ -82,13 +83,15 @@ function ItemPage({ shopid }) {
   return (
     <Switch>
       <Route exact path={path}>
+        <Header />
         <TabBar shopid={shopidLoaded} itemChange={itemChange}></TabBar>
-        <div className="row">
+        <div className="row mw-100">
         <Items items={newItem} cartItems = {cartItems} reloadCartItems={reloadCartItems}/>
         <SideCartBlock items={cartItems} reloadCartItems={reloadCartItems} goCheckout={goCheckout}/>
         </div>
       </Route>
       <Route path={`${path}/checkout`}>
+        <Header />
         <Checkout/>
       </Route>
     </Switch>

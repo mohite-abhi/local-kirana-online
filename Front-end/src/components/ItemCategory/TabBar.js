@@ -1,16 +1,18 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Dropdown from "./dropDownTab";
+import Dropdown from "./DropDownTab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "row",
-    margin: "auto",
-    width: "fit-content"
+    margin: "20px auto",
+    width: "fit-content",
   },
 }));
 
+
+// imported by Front-end/src/Pages/ItemPage.js
 function TabBar({shopid, itemChange}) {
 
   const classes = useStyles();

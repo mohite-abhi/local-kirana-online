@@ -5,7 +5,7 @@ import ReactBootstrapCarousel from "react-bootstrap-carousel";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
 
-
+// imported by Front-end/src/Pages/Homepage.js
 export default function ControlledCarousel() {
     const [index, setIndex] = useState(0);
   

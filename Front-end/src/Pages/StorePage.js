@@ -1,7 +1,7 @@
 //import './App.css';
 import React from "react";
-import Header from "./components/header";
-import Cards from "./components/cards";
+import Header from "../components/Fixed/Header";
+import {StoreCards} from "../components/Store/StoreCards";
 import ItemPage from "./ItemPage";
 //import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 //variable pakeibi store id store karibaku
@@ -81,7 +81,7 @@ function StorePage({ pin }) {
     <Switch>
       <Route exact path={path}>
         <Header />
-        <Cards props={props} />
+        <StoreCards props={props} />
       </Route>
       <Route path={`${path}/item`}>
         <ItemPage shopid={shopid}></ItemPage>

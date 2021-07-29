@@ -2,7 +2,12 @@ import React from "react";
 import PinInput from "react-pin-input";
 import { Link, withRouter } from "react-router-dom";
 import fetch from "isomorphic-fetch";
-import ChangeRoute from "./ChangeRoute";
+import { useHistory } from "react-router-dom";
+
+// const ChangeRoute = (path) => {
+//   const history = useHistory();
+//   history.push("path");
+// };
 
 class App extends React.PureComponent {
   constructor(props) {

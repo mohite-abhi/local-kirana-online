@@ -2,6 +2,8 @@ import React, { useState } from "react";
 //Ingredients needed
 import ItemIndividual from "./ItemIndividual.js";
 
+
+// imported by Front-end/src/ItemPage.js
 export const SideCartBlock = ({items, reloadCartItems, goCheckout}) => {
   let calculateTotalPrice = () =>
   {
