@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //Ingredients needed
 import ItemIndividual from "./ItemIndividual.js";
 
-
+import Button from "@material-ui/core/Button";
 // imported by Front-end/src/ItemPage.js
 export const SideCartBlock = ({items, reloadCartItems, goCheckout}) => {
   let calculateTotalPrice = () =>
@@ -18,9 +18,10 @@ export const SideCartBlock = ({items, reloadCartItems, goCheckout}) => {
 
   return (
     <>
-    <div className="col-sm-3 order-md-2 mb-4">
+    <div className="col-sm-3 order-md-2 mb-">
       <h4 className="d-flex justify-content-between align-items-center mb-3">
-        <span className="text-muted">Cart</span>
+        <Button variant="contained" color="primary" onClick = {()=>goCheckout()}>Checkout</Button>
+
         <span className="badge badge-secondary badge-pill">₹ {calculateTotalPrice()}</span>
       </h4>
       <ul className="list-group mb-3">
@@ -78,10 +79,8 @@ export const SideCartBlock = ({items, reloadCartItems, goCheckout}) => {
         <li className="list-group-item d-flex justify-content-between">
         <button type="button" className="btn btn-dark" onClick={props.toggleLoadWindow}>Load pizza</button>
         </li> */}
-        <li>
           {/* <button>Checkout</button> */}
-           <button onClick = {()=>goCheckout()}>Checkout</button>
-        </li>
+    
       </ul>
       {/* <p className="notificationSaving" style={color}>
         {text}

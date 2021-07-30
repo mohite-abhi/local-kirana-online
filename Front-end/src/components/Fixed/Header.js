@@ -63,37 +63,60 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+
+export default function Header({searchBar = false, threeLines = false, searchButtonHandler = ()=>{}}) {
   const classes = useStyles();
+  const onChange = (event) => {
+    searchButtonHandler(event.target.value);
+    // alert(event.target.value);
+  };
+  
+  let searchSection, threeLinesButton;
+  if (searchBar === true) {
+    searchSection = 
+      <div className={classes.search}>
+        <div className={classes.searchIcon}>
+          <SearchIcon />
+        </div>
+        <InputBase
+          placeholder="Search…"
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+          onChange={onChange}
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </div>
+  }
+  else{
+    searchSection = <></>
+  }
+
+
+  if (threeLines) {
+    threeLinesButton = 
+      <IconButton
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="open drawer"
+        >
+          <MenuIcon />
+        </IconButton>
+  }
+  else
+    threeLinesButton = <></>
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+          {threeLinesButton}
           <Typography className={classes.title} variant="h6" noWrap>
             Local-online-kirana
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+          {searchSection}
         </Toolbar>
       </AppBar>
     </div>

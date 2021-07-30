@@ -57,10 +57,14 @@ function ItemPage({ shopid }) {
   let [newItem, setNewItem] = useState([]);
   let [cartItems, reloadCartItems] = useState(syncCartWithLocalStorage());
   let [initializing, initialization] = useState("yes");
+  let [newItemBackup, setNewItemBackup] = useState([]);
 
   // syncCartWithLocalStorage(reloadCartItems);
   function itemChange(data){
     setNewItem(data);
+    if (data.length > newItemBackup.length){
+      setNewItemBackup(data); 
+    }
   }
 
   if (initializing === "yes"){
@@ -73,17 +77,29 @@ function ItemPage({ shopid }) {
     })
     .then((res) => res.json())
     .then((res) => {
-      setNewItem(res);
+      itemChange(res);
     });
   initialization("done");
   }
 
-
+  const searchButtonHandler = (search) =>{
+    let filteredList = [] 
+    // alert(val);
+    newItemBackup.map((item)=>{
+      if(item.itemName.toLowerCase().includes(search.toLowerCase()) ||
+      item.itemDesc.toLowerCase().includes(search.toLowerCase()) ){
+        filteredList.push(item);
+      }
+    })
+    // alert(JSON.stringify(filteredList));
+    // alert(JSON.stringify(newItemBackup));
+    itemChange(filteredList);
+  }
 
   return (
     <Switch>
       <Route exact path={path}>
-        <Header />
+        <Header searchBar = {true} searchButtonHandler={searchButtonHandler}/>
         <TabBar shopid={shopidLoaded} itemChange={itemChange}></TabBar>
         <div className="row mw-100">
         <Items items={newItem} cartItems = {cartItems} reloadCartItems={reloadCartItems}/>

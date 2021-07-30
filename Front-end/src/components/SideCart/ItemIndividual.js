@@ -14,7 +14,7 @@ const ItemIndividual = (props) => {
     <li className="list-group-item d-flex justify-content-between lh-condensed choseOption">
       <div className="descriptionContainer">
         <h6 className="my-0">{props.name}</h6>
-        <small className="text-muted">₹ {props.price}</small>
+        <small className="text-muted">₹ {props.price * props.quantity}</small>
       </div>
       <div className="center">
         <p>
