@@ -4,6 +4,7 @@ import Items from "../components/Item/Items";
 
 import TabBar from "../components/ItemCategory/TabBar";
 
+import Footer from "../components/Fixed/footer";
 import Checkout from "../components/Checkout/Checkout";
 import {SideCartBlock} from "../components/SideCart/SideCartBlock";
 import Header from "../components/Fixed/Header";
@@ -139,6 +140,7 @@ function ItemPage({ shopid }) {
         <Items items={newItem} cartItems = {cartItems} reloadCartItems={reloadCartItems}/>
         <SideCartBlock items={cartItems} reloadCartItems={reloadCartItems} goCheckout={goCheckout} smallCart={smallCart} toggleSmallCart={toggleSmallCart}/>
         </div>
+        
       </Route>
       <Route path={`${path}/checkout`}>
         <Header />
