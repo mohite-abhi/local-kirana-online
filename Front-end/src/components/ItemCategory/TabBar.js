@@ -5,9 +5,14 @@ import Dropdown from "./DropDownTab";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "row",
+    // flexDirection: "row",
     margin: "20px auto",
-    width: "fit-content",
+    // width: "fit-content",
+    flex:1,
+    "flex-wrap":"wrap",
+    "align-items": "center",
+    "justify-content": "center"
+    
   },
 }));
 

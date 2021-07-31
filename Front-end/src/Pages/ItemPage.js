@@ -1,11 +1,13 @@
 //import './App.css';
+import React, { useState, Fragment } from "react";
 import Items from "../components/Item/Items";
-import React from "react";
+
 import TabBar from "../components/ItemCategory/TabBar";
-import {useState } from "react";
+
 import Checkout from "../components/Checkout/Checkout";
 import {SideCartBlock} from "../components/SideCart/SideCartBlock";
 import Header from "../components/Fixed/Header";
+import Media from 'react-media';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +16,7 @@ import {
   useHistory,
   useRouteMatch,
 } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 
 
@@ -43,21 +46,36 @@ function loadSave(localVarName, toSave){
 
 
 function ItemPage({ shopid }) {
-  let { path, url } = useRouteMatch();
-  let history = useHistory();
-     const goCheckout = () => {
-    history.push(`${url}/checkout`);
-  };
-
-
-  let shopidLoaded = loadSave('shopid', shopid);
-
-
-
   let [newItem, setNewItem] = useState([]);
   let [cartItems, reloadCartItems] = useState(syncCartWithLocalStorage());
   let [initializing, initialization] = useState("yes");
   let [newItemBackup, setNewItemBackup] = useState([]);
+  let [userInfo, setUserInfo] = useState({});
+  let [smallCart, setSmallCart] = useState("hidden");
+  let history = useHistory();
+  let { path, url } = useRouteMatch();
+  let shopidLoaded = loadSave('shopid', shopid);
+
+
+
+  const goCheckout = () => {
+    history.push(`${url}/checkout`);
+  };
+
+
+
+
+
+
+  const toggleSmallCart = () => {
+    if (smallCart === "visible"){
+      setSmallCart("hidden");
+    }
+    else{
+      setSmallCart("visible")
+    }
+    // alert("hello")
+  };
 
   // syncCartWithLocalStorage(reloadCartItems);
   function itemChange(data){
@@ -100,15 +118,31 @@ function ItemPage({ shopid }) {
     <Switch>
       <Route exact path={path}>
         <Header searchBar = {true} searchButtonHandler={searchButtonHandler}/>
-        <TabBar shopid={shopidLoaded} itemChange={itemChange}></TabBar>
+        <div className="row mw-100">
+        <TabBar shopid={shopidLoaded} itemChange={itemChange} ></TabBar>
+        <div></div>
+      <Media queries={{
+        small: "(max-width: 599px)",
+        medium: "(min-width: 600px) and (max-width: 1199px)",
+        large: "(min-width: 1200px)"
+      }}>
+        {matches => (
+          <Fragment>
+            {matches.small && <Button style={{"max-height":"40px", "align-self":"center"}} variant="contained" color="secondary" onClick={()=>toggleSmallCart()}>Cart</Button>}
+            {matches.medium && <Button style={{"max-height":"40px", "align-self":"center"}} variant="contained" color="secondary" onClick={()=>toggleSmallCart()}>Cart</Button>}
+          </Fragment>
+        )}
+      </Media>
+        
+        </div>
         <div className="row mw-100">
         <Items items={newItem} cartItems = {cartItems} reloadCartItems={reloadCartItems}/>
-        <SideCartBlock items={cartItems} reloadCartItems={reloadCartItems} goCheckout={goCheckout}/>
+        <SideCartBlock items={cartItems} reloadCartItems={reloadCartItems} goCheckout={goCheckout} smallCart={smallCart} toggleSmallCart={toggleSmallCart}/>
         </div>
       </Route>
       <Route path={`${path}/checkout`}>
         <Header />
-        <Checkout/>
+        <Checkout userInfo = {userInfo} setUserInfo = {userInfo}/>
       </Route>
     </Switch>
   );

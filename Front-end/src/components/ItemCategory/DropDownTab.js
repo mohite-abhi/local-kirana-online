@@ -24,13 +24,13 @@ function Dropdown({ menuName, menuItems, shopid, itemChange }) {
 
   let menuItemsList = Object.keys(menuItems);
   let menuItemsHtml = Object.keys(menuItems).map((element, i) => (
-    <MenuItem onClick={(e) => showItems(i)}>{element.slice(25)}</MenuItem>
+    <MenuItem onClick={(e) => showItems(i)}  >{element.slice(25)}</MenuItem>
   ));
 
   return (
     <Menu
       menuButton={
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" style={{"min-width":"fit-content"}}>
           {menuName}
         </Button>
       }
