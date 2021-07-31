@@ -14,7 +14,7 @@ export const SideCartBlock = ({items, reloadCartItems, goCheckout}) => {
     // alert(JSON.stringify(items["60ec16388ea9c10f4882100f"].itemPrice));
     return total;
   };
-
+  
 
   return (
     <>

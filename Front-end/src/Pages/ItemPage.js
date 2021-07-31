@@ -2,6 +2,7 @@
 import Items from "../components/Item/Items";
 import React from "react";
 import TabBar from "../components/ItemCategory/TabBar";
+import Footer from "../components/Fixed/footer";
 import {useState } from "react";
 import Checkout from "../components/Checkout/Checkout";
 import {SideCartBlock} from "../components/SideCart/SideCartBlock";
@@ -89,10 +90,12 @@ function ItemPage({ shopid }) {
         <Items items={newItem} cartItems = {cartItems} reloadCartItems={reloadCartItems}/>
         <SideCartBlock items={cartItems} reloadCartItems={reloadCartItems} goCheckout={goCheckout}/>
         </div>
+        
       </Route>
       <Route path={`${path}/checkout`}>
         <Header />
         <Checkout/>
+        
       </Route>
     </Switch>
   );

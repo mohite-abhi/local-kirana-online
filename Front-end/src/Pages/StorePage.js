@@ -3,6 +3,8 @@ import React from "react";
 import Header from "../components/Fixed/Header";
 import {StoreCards} from "../components/Store/StoreCards";
 import ItemPage from "./ItemPage";
+import Footer from "../components/Fixed/footer";
+
 //import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 //variable pakeibi store id store karibaku
 import { useCallback, useState } from "react";
@@ -85,6 +87,9 @@ function StorePage({ pin }) {
       </Route>
       <Route path={`${path}/item`}>
         <ItemPage shopid={shopid}></ItemPage>
+        <footer>
+          <Footer />
+          </footer>
       </Route>
 
     </Switch>

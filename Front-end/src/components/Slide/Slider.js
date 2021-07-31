@@ -19,7 +19,7 @@ export default function ControlledCarousel() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://source.unsplash.com/V2OvJn2lj5k/640x959"
+            src="https://i.ibb.co/vzwWqvz/Screenshot-2021-07-31-My-Kirana-Online-Grocery-Shopping-App-2.png"
             alt="First slide"
             display= "block"
             max-width =  "100%"
@@ -27,14 +27,13 @@ export default function ControlledCarousel() {
             paddingtop = "56.25%"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+           
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://source.unsplash.com/u8N64_Pj6TU/640x960"
+            src="https://i.ibb.co/S3PmqJW/Screenshot-2021-07-31-My-Kirana-Online-Grocery-Shopping-App-3.png"
             alt="Second slide"
             max-width =  "100%"
             height= "400"
@@ -42,14 +41,13 @@ export default function ControlledCarousel() {
           />
   
           <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://source.unsplash.com/MRHG1DvP46I/640x960"
+            src="https://i.ibb.co/Vt9gCPr/Screenshot-2021-07-31-My-Kirana-Online-Grocery-Shopping-App-1.png"
             alt="Third slide"
             max-width =  "100%"
             height= "400"
@@ -57,10 +55,6 @@ export default function ControlledCarousel() {
           />
   
           <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

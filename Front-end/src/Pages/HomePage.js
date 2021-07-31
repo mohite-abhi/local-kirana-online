@@ -10,7 +10,7 @@ import Slider from "../components/Slide/Slider";
 import Header from "../components/Fixed/Header";
 import Pin from "../components/Home/PincodeForm";
 import UseGeolocation from "../components/Home/Geoloc";
-
+import Footer from "../components/Fixed/footer";
 
 function OnlineKirana() {
   const [pin, setPin] = useState("");
@@ -41,11 +41,15 @@ function OnlineKirana() {
           {/* <WelcomePage onPinChange={onPinChange} history={history} /> */}
            <Header />
           <Slider />
-          <UseGeolocation />
+          {/* <UseGeolocation /> */}
           <Pin onPinChange={onPinChange} history={history} />
+         <footer>
+          <Footer />
+          </footer>
         </Route>
         <Route path="/shop">
           <StorePage pin={pin} />
+         
         </Route>
       </Switch>
     </BrowserRouter>
