@@ -38,7 +38,7 @@ app.use('',shopRoutes);
 
 app.post("/customer", async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const user = new Customer(req.body);
     const createUser = await user.save();
     res.status(201).send(createUser);
@@ -49,7 +49,7 @@ app.post("/customer", async (req, res) => {
 
 app.post("/orderSave", async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const user = new Order(req.body);
     const createUser = await user.save();
     res.status(201).send(createUser);

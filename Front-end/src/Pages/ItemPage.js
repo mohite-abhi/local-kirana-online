@@ -142,7 +142,7 @@ function ItemPage({ shopid }) {
       </Route>
       <Route path={`${path}/checkout`}>
         <Header />
-        <Checkout userInfo = {userInfo} setUserInfo = {userInfo}/>
+        <Checkout userInfo = {userInfo} setUserInfo = {setUserInfo} cartItems={cartItems}/>
       </Route>
     </Switch>
   );

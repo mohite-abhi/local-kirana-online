@@ -14,12 +14,6 @@ const products = [
   { name: 'Shipping', desc: '', price: 'Free' },
 ];
 const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -33,8 +27,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+
+export default function Review({userInfo, setUserInfo, cartItems}) {
+  
+
+// alert(userInfo.cardNumber)
+  const payments = [
+    // { name: 'Card type', detail: 'Visa' },
+    { name: 'Card holder', detail: userInfo.cardname },
+    { name:"Card Number", detail: 'xxxx-xxxx-xxxx-'+
+      (()=>{
+        if (userInfo.cardNumber === undefined || userInfo.cardNumber.length < 8) {
+          return "????"
+         }
+         else {
+           return userInfo.cardNumber.slice(8)
+         }
+      })()
+    },
+    { name: 'Expiry date', detail: userInfo.expDate },
+  ];
   const classes = useStyles();
+  // Object.keys(cartItems).map((itemId) => (
+  //   alert(cartItems[itemId])
+  // ))
+  // alert(JSON.stringify(cartItems["60ec16388ea9c10f4882100f"]))
 
   return (
     <React.Fragment>
@@ -42,16 +59,26 @@ export default function Review() {
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+        {Object.keys(cartItems).map((itemId) => (
+          <ListItem className={classes.listItem} key={cartItems[itemId].itemName}>
+            <ListItemText primary={cartItems[itemId].itemName + " (34 * ₹12)"} secondary={cartItems[itemId].itemDesc.slice(0,60)+"..."} />
+            <Typography variant="body2">{"(" + cartItems[itemId].itemQty}</Typography>
+            <Typography variant="body2">{" * ₹ " + cartItems[itemId].itemPrice }</Typography>
+            <Typography variant="body2">{") = ₹" + cartItems[itemId].itemPrice * cartItems[itemId].itemQty}</Typography>
           </ListItem>
         ))}
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            $34.06
+            {
+              (()=>{
+                let totalPrice = 0;
+                Object.keys(cartItems).map((itemId) => (
+                  totalPrice += cartItems[itemId].itemPrice * cartItems[itemId].itemQty)
+                )
+                return "₹ " + totalPrice;
+              })()
+            }
           </Typography>
         </ListItem>
       </List>
@@ -60,8 +87,8 @@ export default function Review() {
           <Typography variant="h6" gutterBottom className={classes.title}>
             Shipping
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>{userInfo.firstname + " " + userInfo.lastname}</Typography>
+          <Typography gutterBottom>{[userInfo.address1, userInfo.address2].join(', ')}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>

@@ -20,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Local-Online-Kirana
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -67,25 +67,58 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
 
-export default function Checkout({userInfo, setUserInfo}) {
+export default function Checkout({userInfo, setUserInfo, cartItems}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddressForm userInfo = {userInfo} setUserInfo = {setUserInfo}/>;
+      case 1:
+        return <PaymentForm userInfo = {userInfo} setUserInfo = {setUserInfo}/>;
+      case 2:
+        return <Review userInfo = {userInfo} setUserInfo = {setUserInfo} cartItems = {cartItems}/>;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
   const handleNext = () => {
+    let order = {}
     setActiveStep(activeStep + 1);
+    if (activeStep === 2){
+      let cartItemList = []
+      Object.keys(cartItems).map((itemId) => (
+        cartItemList.push({
+          product: itemId,
+          quantity: cartItems[itemId].itemQty,
+          price: cartItems[itemId].itemPrice,
+        })
+      ))
+      // userInfo.
+      order["cartItems"] = cartItemList;
+      order["name"] = userInfo.firstname + " " + userInfo.lastname;
+      order["phone"] = userInfo.phone;
+      order["pin"] = userInfo.zip;
+      order["state"] = userInfo.state;
+      order["city"] = userInfo.city;
+      order["house"] = userInfo.address1;
+      order["road"] = userInfo.address2;
+      // alert(JSON.stringify(order));
+      localStorage.setItem("temp", JSON.stringify(order));
+      fetch("http://localhost:9000/orderSave", {
+        method: "POST",
+        body: JSON.stringify(order),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        // alert(JSON.stringify(res));
+      });
+    }
   };
 
   const handleBack = () => {
@@ -96,11 +129,6 @@ export default function Checkout({userInfo, setUserInfo}) {
     <React.Fragment>
       <CssBaseline />
       <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar>
       </AppBar>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
