@@ -40,7 +40,7 @@ class App extends React.PureComponent {
       <div className="app">
         <div className = "pin">
           <h2>Pincode</h2>
-        <PinInput
+        <PinInput className="c"
           length={6}
           focus
           ref={(p) => (this.pin = p)}

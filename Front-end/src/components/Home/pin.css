@@ -1,20 +1,46 @@
-.app{
+/* .app{
 margin-top:5%;
-display: block;
-width: 22%;
-margin-left:40%;
-background-color: grey;
-border: 2px solid black;
-
-}
-.pin{
-    padding-left: 5px;
+/* display: block; */
+/* width: 22%; */
+/* margin-left:40%; */
+/* background-color: grey;
+border: 2px solid black; */
+/* display: flex; */
+/* justify-content: center;
+} */ 
+/* .pin{
+    padding-left: 2%;
     align-content: center;
     margin-left: 10%;
     background-color: honeydew;
     width: 80%;
     height: 50%;
     margin-bottom: 9%;
+} */
+.app{
+  margin-top:5%;
+  display: block;
+  width: 32%;
+  margin-left:auto;
+  margin-right: auto;
+  background-color: grey;
+  border: 2px solid black;
+  
+  }
+.pin{
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  margin-left:auto;
+  margin-right: auto;
+  background-color: honeydew;
+  width: 100%;
+  height: 50%;
+  margin-bottom: 9%;
+  font-size: 30px;
+  
 }
 .buttonsa{
     margin-left: 25%;
@@ -42,4 +68,7 @@ border: 2px solid black;
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+.c{
+  background-color: black;
 }
