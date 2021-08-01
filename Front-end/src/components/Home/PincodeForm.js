@@ -39,7 +39,7 @@ class App extends React.PureComponent {
     return (
       <div className="app">
         <div className = "pin">
-          <h2>Enter the Pincode</h2>
+          <h2>Pincode</h2>
         <PinInput
           length={6}
           focus
@@ -47,12 +47,12 @@ class App extends React.PureComponent {
           type="numeric"
           onChange={this.onChange}
         />
-        <p>{value}</p>
+        {/* <p>{value}</p> */}
         </div>
         
-        <div className = "buttons">
-          <button className = "btn" onClick={this.onClear}>Clear</button>
-          <button className = "btn" onClick={() => this.submit(value)}> Submit</button>
+        <div className = "buttonsa">
+          {/* <button className = "btn" onClick={this.onClear}>Clear</button> */}
+          <button className = "btna" onClick={() => this.submit(value)}> Submit</button>
           <p>{this.state.apiResponse}</p>
         </div>
       </div>

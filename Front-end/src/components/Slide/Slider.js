@@ -19,11 +19,11 @@ export default function ControlledCarousel() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://i.ibb.co/vzwWqvz/Screenshot-2021-07-31-My-Kirana-Online-Grocery-Shopping-App-2.png"
+            src="https://i.ibb.co/XJWBkND/Whats-App-Image-2021-08-01-at-13-08-31.jpg"
             alt="First slide"
             display= "block"
             max-width =  "100%"
-            height= "400"
+            height= "500"
             paddingtop = "56.25%"
           />
           <Carousel.Caption>
@@ -33,10 +33,10 @@ export default function ControlledCarousel() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://i.ibb.co/S3PmqJW/Screenshot-2021-07-31-My-Kirana-Online-Grocery-Shopping-App-3.png"
+            src="https://i.ibb.co/tK8ynkv/Whats-App-Image-2021-08-01-at-13-10-06.jpg"
             alt="Second slide"
             max-width =  "100%"
-            height= "400"
+            height= "500"
             paddingtop = "56.25%"
           />
   
@@ -47,10 +47,10 @@ export default function ControlledCarousel() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://i.ibb.co/Vt9gCPr/Screenshot-2021-07-31-My-Kirana-Online-Grocery-Shopping-App-1.png"
+            src="https://i.ibb.co/xzvpCrQ/Whats-App-Image-2021-08-01-at-13-16-27.jpg"
             alt="Third slide"
             max-width =  "100%"
-            height= "400"
+            height= "500"
             paddingtop = "56.25%"
           />
   

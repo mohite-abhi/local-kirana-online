@@ -1,5 +1,5 @@
 .app{
-margin-top:40px;
+margin-top:5%;
 display: block;
 width: 22%;
 margin-left:40%;
@@ -12,20 +12,20 @@ border: 2px solid black;
     align-content: center;
     margin-left: 10%;
     background-color: honeydew;
-    width: 340px;
-    height: 110px;
-    margin-bottom: 20px;
+    width: 80%;
+    height: 50%;
+    margin-bottom: 9%;
 }
-.buttons{
+.buttonsa{
     margin-left: 25%;
     
 }
-.btn{
+.btna{
     /* padding-left: 10px;
     border: 1px solid;
     background-color: lavender; */
-    padding: 10px 20px;
-    margin-left: 10px;
+  padding: 10px 20px;
+  margin-left: 14%;
   font-size: 24px;
   text-align: center;
   cursor: pointer;
@@ -36,9 +36,9 @@ border: 2px solid black;
   border-radius: 15px;
   box-shadow: 0 9px #999;
 }
-.btn:hover {background-color: #3e8e41}
+.btna:hover {background-color: #3e8e41}
 
-.btn:active {
+.btna:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);

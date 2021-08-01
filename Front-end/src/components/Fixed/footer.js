@@ -19,7 +19,7 @@ export default function footer() {
          <a href="https://github.com/mohite-abhi"><img src="https://i.ibb.co/FzvTKgp/Whats-App-Image-2021-07-31-at-16-27-43-1.jpg" alt=""/><span class="name">Abhishek</span></a>
         </div>
         <div class="profile">
-          <img src="https://i.ibb.co/ck4Z5PW/Whats-App-Image-2021-07-31-at-16-27-17.jpg" alt=""/><span class="name">Manish</span>
+        <a href = "https://github.com/Manish-1301" ><img src="https://i.ibb.co/ck4Z5PW/Whats-App-Image-2021-07-31-at-16-27-17.jpg" alt=""/><span class="name">Manish</span></a>
         </div>
         <div class="profile">
          <a href="https://github.com/Krutidipt"><img src="https://i.ibb.co/p4B1Vg5/Whats-App-Image-2021-07-31-at-19-25-59-1.jpg" alt=""/><span class="name">Krutidipt</span></a>
