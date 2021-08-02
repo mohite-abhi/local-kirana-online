@@ -7,7 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-
+import {useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    display: 'none',
+    // display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -65,6 +65,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Header({searchBar = false, threeLines = false, searchButtonHandler = ()=>{}}) {
+  const history = useHistory();
+  
   const classes = useStyles();
   const onChange = (event) => {
     searchButtonHandler(event.target.value);
@@ -113,8 +115,9 @@ export default function Header({searchBar = false, threeLines = false, searchBut
       <AppBar position="static">
         <Toolbar>
           {threeLinesButton}
-          <Typography className={classes.title} variant="h6" noWrap>
-            Local-online-kirana
+          <img src={process.env.PUBLIC_URL + '/logo192.png'} alt="icon" style={{width:"9vh", cursor:"pointer"}} onClick={()=>{history.push("/");}}/>
+          <Typography className={classes.title} variant="h6" noWrap onClick={()=>{history.push("/");}} style={{cursor:"pointer"}}>
+            Banti Bhaiya Shop
           </Typography>
           {searchSection}
         </Toolbar>

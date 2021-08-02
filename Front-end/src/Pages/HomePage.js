@@ -19,29 +19,14 @@ function OnlineKirana() {
 
   const onPinChange = (value) => {
     setPin(value);
-    // fetch("https://local-kirana-online-backend.herokuapp.com/storesFromLocations", {
-    //   method: "POST",
-    //   body: JSON.stringify({ value: value }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     onStoreChange(res.storeData);
-    //   });
   };
-  // const onStoreChange = (data) => {
-  //   setStores(data);
-  // };
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          {/* <WelcomePage onPinChange={onPinChange} history={history} /> */}
-           <Header />
+           <Header/>
           <Slider />
-          {/* <UseGeolocation /> */}
           <Pin onPinChange={onPinChange} history={history} />
          <footer>
           <Footer />

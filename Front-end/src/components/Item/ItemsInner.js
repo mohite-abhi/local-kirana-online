@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    "margin": "0 0px 0 20px"
   },
   cardMedia: {
     paddingTop: "56.25%", // 16:9
@@ -122,7 +123,7 @@ export const ItemsInner = ({ items, cartItems, reloadCartItems}) => {
   const classes = useStyles();
   const storeCards = items.map((item) => {
     return (
-      <Grid item key={item._id} xs={19} sm={6} md={4}>
+      <Grid item key={item._id} xs={19} sm={6} md={4} style={{alignItems:"center"}}>
         <Card className={classes.card} >
           <CardMedia
             className={classes.cardMedia}

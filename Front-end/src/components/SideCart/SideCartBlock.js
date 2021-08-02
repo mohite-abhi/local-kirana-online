@@ -5,7 +5,8 @@ import ItemIndividual from "./ItemIndividual.js";
 
 import Button from "@material-ui/core/Button";
 // imported by Front-end/src/ItemPage.js
-
+import Badge from "@material-ui/core/Badge";
+import { withStyles } from "@material-ui/core/styles";
 
  export const SideCartBlock = ({items, reloadCartItems, goCheckout, smallCart, toggleSmallCart}) => {
   let calculateTotalPrice = () =>
@@ -17,7 +18,16 @@ import Button from "@material-ui/core/Button";
     // alert(JSON.stringify(items["60ec16388ea9c10f4882100f"].itemPrice));
     return total;
   };
+  const StyledBadge = withStyles((theme) => ({
+  badge: {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+  }))(Badge);
 
+  
   let myClickHandler = (type, value) => {
     let ourCart = {}
     Object.entries(localStorage).map((item)=>{
@@ -54,6 +64,7 @@ import Button from "@material-ui/core/Button";
     if (smallerDevice === true){
       smallStyle = {
         position : "fixed",
+        zIndex:2,
         top : 0,
         left : 0, 
         right : 0,
@@ -72,9 +83,13 @@ import Button from "@material-ui/core/Button";
   >
       <h4 className="d-flex justify-content-between align-items-center mb-3">
         {backButton}
+        <StyledBadge
+                      badgeContent={Object.keys(items).length}
+                      color="primary"
+                    >
         <Button variant="contained" color="primary" onClick = {()=>goCheckout()}>Checkout</Button>
-
-        <span className="badge badge-secondary badge-pill">₹ {calculateTotalPrice()}</span>
+        </StyledBadge>
+        <span className="badge badge-secondary badge-pill" style={{backgroundColor:"#3f51b5"}}>₹ {calculateTotalPrice()}</span>
       </h4>
       <ul className="list-group mb-3">
         {Object.entries(items).map((item) => {

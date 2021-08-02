@@ -30,7 +30,7 @@ function Dropdown({ menuName, menuItems, shopid, itemChange }) {
   return (
     <Menu
       menuButton={
-        <Button variant="contained" color="primary" style={{"min-width":"fit-content"}}>
+        <Button variant="contained" color="primary" style={{"min-width":"fit-content", margin:"1px"}} >
           {menuName}
         </Button>
       }

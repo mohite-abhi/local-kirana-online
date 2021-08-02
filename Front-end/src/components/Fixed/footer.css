@@ -1,43 +1,28 @@
- body {
-    /* margin-top: 80%; */
-    min-height: 60vh;
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f7f7;
-  } 
-  .team{
-    background-color: darkgrey;
-  }
+
+  .team {
+    background: linear-gradient(#b4bfff,#3f51b5);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 18vh;
+    width: 100%;
+    /* overflow: scroll; */
+    z-index: -1;
+}
   .section-heading {
-    margin-top: 100px;
     font-family: "Dancing Script", cursive;
     text-align: center;
-    font-size: 24px;
-    color: black;
-    /* margin: 0 0 70px; */
-    background-color: darkgrey;
+    font-size: 2.5vh;
   }
   
   .container {
-    /* margin-top: 0%; */
     display: flex;
-    justify-content: center;
-    /* background-color: darkgrey; */
-    /* width: 90%;
-    max-width: 1440px;
-    height: 100px;
-    margin-bottom: 40px; */
-    /* margin: 0 auto; */
-    
+    justify-content: space-around;
   }
   
   .profile {
-    position: relative;
-    margin-left: 10px;
-    margin-bottom: 5px;
-    transition: all 0.3s;
-    /* margin-bottom: 0%; */
+    transition: all 0.1s;
+    /* margin: 4px; */
   }
   
   .profile:hover {
@@ -45,46 +30,29 @@
   }
   
   .profile img {
-    max-width: 25%;
+    max-width: 3rem;
     border-radius: 50%;
-    border: 5px solid #f7f7f7;
-    filter: drop-shadow(-20px 0 10px rgba(0, 0, 0, 0.1));
+    border: 2px solid #f7f7f7;
     cursor: pointer;
   }
 
-  .profile:not(:first-child) img {
-    /* margin-left: 10px; */
-  }
   
   .profile .name {
-    position: absolute;
-    background-color: #10996d;
-    color: #fff;
+    position: relative;
+    color: rgb(0, 0, 0);
     font-family: "Bebas Neue", cursive;
-    /* padding: 15px 30px; */
-    border-radius: 100px;
-    /* bottom: -80px; left: 50%; */
     white-space: nowrap;
-    /* transform: translate(-50%, -50px); */
+    font-size: 2.5vh;
     transition: transform .2s;
-    letter-spacing: 1px;
-    font-size: 20px;
     opacity: 0;
-    /* transition: all 0.3s; */
+    background-color: rgb(207, 226, 255);
+    border-radius: 25px;
+    /* padding: 0 5px; */
+    text-decoration: none;
+    /* margin-right: 50px; */
   }
   
-  .profile .name::before {
-    content: "";
-    position: absolute;
-    /* width: 15px; height: 15px; */
-    background-color: #10996d;
-    top: 0; left: 50%;
-    /* transform: translate(-50%, -50%) rotate(45deg); */
-  }
   
   .profile img:hover + .name {
     opacity: 1;
-    /* transform: translateX(-50%); */
-    /* transform: scale(1.5); */
-    box-shadow: 0 10px 20px rgba(86, 86, 198, 0.3);
   }

@@ -61,10 +61,10 @@ export default function Review({userInfo, setUserInfo, cartItems}) {
       <List disablePadding>
         {Object.keys(cartItems).map((itemId) => (
           <ListItem className={classes.listItem} key={cartItems[itemId].itemName}>
-            <ListItemText primary={cartItems[itemId].itemName + " (34 * ₹12)"} secondary={cartItems[itemId].itemDesc.slice(0,60)+"..."} />
-            <Typography variant="body2">{"(" + cartItems[itemId].itemQty}</Typography>
-            <Typography variant="body2">{" * ₹ " + cartItems[itemId].itemPrice }</Typography>
-            <Typography variant="body2">{") = ₹" + cartItems[itemId].itemPrice * cartItems[itemId].itemQty}</Typography>
+            <ListItemText primary={cartItems[itemId].itemName + " (" + cartItems[itemId].itemQty +" * ₹"+cartItems[itemId].itemPrice+")"} secondary={cartItems[itemId].itemDesc.slice(0,60)+"..."} />
+            {/* <Typography variant="body2">{"(" + cartItems[itemId].itemQty}</Typography>
+            <Typography variant="body2">{" * ₹ " + cartItems[itemId].itemPrice }</Typography> */}
+            <Typography variant="body2">{"₹" + cartItems[itemId].itemPrice * cartItems[itemId].itemQty}</Typography>
           </ListItem>
         ))}
         <ListItem className={classes.listItem}>

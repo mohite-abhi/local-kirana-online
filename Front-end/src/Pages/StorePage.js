@@ -87,9 +87,6 @@ function StorePage({ pin }) {
       </Route>
       <Route path={`${path}/item`}>
         <ItemPage shopid={shopid}></ItemPage>
-        <footer>
-          <Footer />
-          </footer>
       </Route>
 
     </Switch>

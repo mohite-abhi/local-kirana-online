@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     // flexDirection: "row",
-    margin: "20px auto",
+    margin: "20px 10px",
     // width: "fit-content",
     flex:1,
     "flex-wrap":"wrap",
@@ -58,7 +58,7 @@ function TabBar({shopid, itemChange}) {
 
 
   let DropDownItems = Object.keys(dropDownData).map((dropDown) => (
-    <Dropdown menuName={dropDown} menuItems={dropDownData[dropDown]} shopid={shopid}  itemChange={itemChange}/>
+    <Dropdown menuName={dropDown} menuItems={dropDownData[dropDown]} shopid={shopid}  itemChange={itemChange} />
    ));
 
 

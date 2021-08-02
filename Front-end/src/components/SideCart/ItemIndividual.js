@@ -4,7 +4,9 @@ import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-
+import Button from "@material-ui/core/Button";
+import { ButtonGroup } from "@material-ui/core";
+import { Add, Remove } from "@material-ui/icons";
 //Ingredients needed
 
 library.add(faMinus, faPlus);
@@ -20,15 +22,31 @@ const ItemIndividual = (props) => {
         <p>
           </p><div className="input-group">
               <span className="input-group-btn">
-                  <button onClick={props.clickHandler.bind(this, props.type, false)} type="button" className="btn btn-danger btn-number" data-type="minus">
+                <ButtonGroup
+              color="primary"
+              aria-label="outlined primary button group"
+            >
+              <Button
+               onClick={props.clickHandler.bind(this, props.type, false)} 
+              >
+                <Remove />
+              </Button>
+              <Button disabled>{props.quantity}</Button>
+              <Button
+               onClick={() => {props.clickHandler(props.type, true)}}
+              >
+                <Add />
+              </Button>
+            </ButtonGroup>
+                  {/* <button onClick={props.clickHandler.bind(this, props.type, false)} type="button" className="btn btn-outline-primary btn-number" data-type="minus">
                     <FontAwesomeIcon icon="minus" />
                   </button>
               </span>
               <input readOnly={true} type="text" className="form-control input-number quantitySelector" value={props.quantity} min="0" max="100"/>
               <span className="input-group-btn">
-                  <button onClick={() => {props.clickHandler(props.type, true)}}type="button" className="btn btn-success btn-number" data-type="plus">
+                  <button onClick={() => {props.clickHandler(props.type, true)}}type="button" className="btn btn-outline-primary btn-number" data-type="plus">
                       <FontAwesomeIcon icon="plus" />
-                  </button>
+                  </button> */}
               </span>
           </div>
       <p></p>
