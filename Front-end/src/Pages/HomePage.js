@@ -19,7 +19,7 @@ function OnlineKirana() {
 
   const onPinChange = (value) => {
     setPin(value);
-    // fetch("http://localhost:9000/storesFromLocations", {
+    // fetch("https://local-kirana-online-backend.herokuapp.com/storesFromLocations", {
     //   method: "POST",
     //   body: JSON.stringify({ value: value }),
     //   headers: {

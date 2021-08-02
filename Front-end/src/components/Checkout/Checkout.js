@@ -107,7 +107,7 @@ export default function Checkout({userInfo, setUserInfo, cartItems}) {
       order["road"] = userInfo.address2;
       // alert(JSON.stringify(order));
       localStorage.setItem("temp", JSON.stringify(order));
-      fetch("http://localhost:9000/orderSave", {
+      fetch("https://local-kirana-online-backend.herokuapp.com/orderSave", {
         method: "POST",
         body: JSON.stringify(order),
         headers: {

@@ -87,7 +87,7 @@ function ItemPage({ shopid }) {
   }
 
   if (initializing === "yes"){
-    fetch("http://localhost:9000/shopitem/id", {
+    fetch("https://local-kirana-online-backend.herokuapp.com/shopitem/id", {
       method: "POST",
       body: JSON.stringify({ val: shopidLoaded }),
       headers: {

@@ -53,7 +53,7 @@ function StorePage({ pin }) {
   if (initializing === "yes"){
 
 
-     fetch("http://localhost:9000/storesFromLocations", {
+     fetch("https://local-kirana-online-backend.herokuapp.com/storesFromLocations", {
       method: "POST",
       body: JSON.stringify({ value: pinLoaded }),
       headers: {

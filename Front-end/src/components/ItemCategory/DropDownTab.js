@@ -9,7 +9,7 @@ function Dropdown({ menuName, menuItems, shopid, itemChange }) {
   let showItems = function (value) {
     let itemCategory = menuItemsList[value].slice(0, 24);
     // alert(this.shopid);
-    fetch("http://localhost:9000/subcategory", {
+    fetch("https://local-kirana-online-backend.herokuapp.com/subcategory", {
       method: "POST",
       body: JSON.stringify({ itemCategory: itemCategory, shopId: shopid }),
       headers: {
