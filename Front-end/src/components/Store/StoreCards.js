@@ -69,7 +69,9 @@ export const StoreCards = function({ props }) {
 
   const storeCards = props.stores.map((card) => (
     <Grid item key={card.itemID} xs={12} sm={6} md={4}>
-      <Card className={classes.card}>
+      <Card className={classes.card} onClick={() => {
+              props.callback(card._id);
+            }} style={{cursor:"pointer"}}>
         <CardMedia
           className={classes.cardMedia}
           image="https://source.unsplash.com/random"
@@ -92,9 +94,9 @@ export const StoreCards = function({ props }) {
           >
             View
           </Button>
-          <Button size="small" color="primary">
+          {/* <Button size="small" color="primary">
             Edit
-          </Button>
+          </Button> */}
         </CardActions>
       </Card>
     </Grid>
